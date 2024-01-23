@@ -3,9 +3,9 @@ project:
   output-dir: docs
 
 website:
-  title: "First China Pharma R user group meeting"
-  description: "Our first meet-up"
-  site-url: https://github.com/pharmarug/pharmarug-2023
+  title: "China Pharma R user group meeting 2024"
+  description: ""
+  site-url: https://github.com/pharmarug/pharmarug-2024
   search: true
   navbar:
     left:
@@ -15,15 +15,14 @@ website:
       - href: program.qmd
         text: Program
         icon: "folder"
-      - href: highlights.qmd
-        text: Event highlights
-        icon: "camera"
   page-footer:
     center:
-      - text: "NEST"
-        href: https://github.com/insightsengineering
       - text: "Good software engineering practice for R packages"
         href: https://openpharma.github.io/workshop-r-swe/
+      - text: "PharmaRUG 2023"
+        href: https://github.com/pharmarug/pharmarug-2023
+      - text: "Open Source Clinical Reporting summeR"
+        href: https://insightsengineering.github.io/nest-2023-summeR/
 
 format:
   html:

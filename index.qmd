@@ -1,6 +1,27 @@
 ---
-title: "First China Pharma R user group meeting"
+title: "China Pharma R user group meeting 2024"
 ---
 
+2nd China Pharmaceutical Industry R User Group Meeting will be held on March 29, 2024, both on-site and online. On-site meeting locations: Shanghai (Novartis campus), Beijing (MSD campus).
 
-<img src="resources/grouped.png" width="100%">
+
+
+第二届中国医药行业R用户大会将于2024年3月29日召开。线上线下同步进行。线下会议地点：上海（诺华园区），北京（默沙东园区）。
+
+
+| Key dates                 |                                    |
+| ------------------------- | ---------------------------------- |
+| 13-Oct-2023               | Call for Papers Opens              |
+| 31-Jan-2024               | Call for Papers Closes             |
+| 1-Feb-2024 to  7-Feb-2024 | Acceptance Notices Sent to Authors |
+| 1-Feb-2024                | Conference Registration Opens      |
+| 29-Feb-2024               | Conference Registration Closes     |
+| 22-Mar-2024               | Final Papers/Slides Due            |
+| 29-Mar-2024               | China Pharma R User Group meeting  |
+
+
+​If you are interested in presenting at this meeting, please submit your topic by scanning below QR code. Deadline for submitting topics is January 31st, 2024.
+
+如果您感兴趣在本次会议上做演讲，请扫描一下二维码来提交演讲题目。截止日期为2024年1月31日。
+
+<img src="resources/640.jpg" width="100%">
