@@ -20,7 +20,7 @@ website:
       - text: "Good software engineering practice for R packages"
         href: https://openpharma.github.io/workshop-r-swe/
       - text: "PharmaRUG 2023"
-        href: https://github.com/pharmarug/pharmarug-2023
+        href: https://pharmarug.github.io/pharmarug-2023/
       - text: "Open Source Clinical Reporting summeR"
         href: https://insightsengineering.github.io/nest-2023-summeR/
 
