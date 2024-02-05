@@ -24,7 +24,7 @@ Huadan Li, Zhiping Yan, Dizal
 *ABSTRACT*Medical Data Review and Analysis Hub (MedDRAH /’med’ra:/) is an interactive Web-based real-time clinical trial data monitoring and analysis platform that enables Medical and PV Physicians, Statisticians, and PK Scientists to review, analyze, and generate reports through intuitive point-and-click wizards. The functions below are included in MedDRAH: Review real-time EDC and SDTM data; Generate visual reports for medical data review; Perform comprehensive exploratory analysis utilizing a complete suite of analysis and reporting (A & R) tools; Create the patient narratives; Conduct standardized pharmacokinetic statistical analyses, including assessments of dose-proportionality, food/fed effects, drug-drug interactions (DDI), and exposure-response (E-R) relationships. This presentation will introduce how to design and develop such platform by using R and JavaScript.
 
 
-### Leveraging R for Real-Time Data Analysis and Reporti+L7ng in the AI+HI Paradigm
+### Leveraging R for Real-Time Data Analysis and Reporting in the AI+HI Paradigm
 Hao Chen, Beigene
 
 *ABSTRACT*R is an excellent programming language for data analysis and reporting, featuring a mature platform developed by Posit@ and a thriving ecosystem within the pharmaceutical industry.
