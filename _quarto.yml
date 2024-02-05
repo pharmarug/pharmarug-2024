@@ -5,13 +5,16 @@ project:
 website:
   title: "China Pharma R user group meeting 2024"
   description: ""
-  site-url: https://github.com/pharmarug/pharmarug-2024
+  site-url: https://pharmarug.github.io/pharmarug-2024/
   search: true
   navbar:
     left:
       - href: index.qmd
         text: Home
         icon: "house-fill"
+      - href: reg.qmd
+        text: Registration
+        icon: "calendar"
       - href: program.qmd
         text: Program
         icon: "folder"
