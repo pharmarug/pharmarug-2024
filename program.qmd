@@ -28,7 +28,7 @@ title: "China Pharma RUG Meeting Program"
 | 17:20-17:30     | Closing Remarks                                                                                               | Yanli Chang, Novartis                      | Shanghai          |
 
 
-###Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary} 
+### Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary} 
 Daniel Sjoberg, Roche 
 
 *ABSTRACT*The CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis outcomes in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.
@@ -42,13 +42,13 @@ While {cards} calculates statistics and stores them in a structured object, it c
 The {cards} and {gtsummary} packages stand as robust and versatile tools, poised to assist in a multitude of analytical endeavors.
 
 
-###Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform
+### Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform
 Huadan Li, Zhiping Yan, Dizal
 
 *ABSTRACT*Medical Data Review and Analysis Hub (MedDRAH /’med’ra:/) is an interactive Web-based real-time clinical trial data monitoring and analysis platform that enables Medical and PV Physicians, Statisticians, and PK Scientists to review, analyze, and generate reports through intuitive point-and-click wizards. The functions below are included in MedDRAH: Review real-time EDC and SDTM data; Generate visual reports for medical data review; Perform comprehensive exploratory analysis utilizing a complete suite of analysis and reporting (A & R) tools; Create the patient narratives; Conduct standardized pharmacokinetic statistical analyses, including assessments of dose-proportionality, food/fed effects, drug-drug interactions (DDI), and exposure-response (E-R) relationships. This presentation will introduce how to design and develop such platform by using R and JavaScript.
 
 
-###Leveraging R for Real-Time Data Analysis and Reporti+L7ng in the AI+HI Paradigm
+### Leveraging R for Real-Time Data Analysis and Reporti+L7ng in the AI+HI Paradigm
 Hao Chen, Beigene
 
 *ABSTRACT*R is an excellent programming language for data analysis and reporting, featuring a mature platform developed by Posit@ and a thriving ecosystem within the pharmaceutical industry.
@@ -60,13 +60,13 @@ In parallel, R Shiny offers a superb UI framework that enhances human-computer i
 In our presentation, we will showcase a R Shiny application designed to demonstrate this concept. We will illustrate how this integrated approach can significantly improve efficiency and decision-making in our daily work.
 
 
-###From XPT to Dataset-JSON as Alternative Transport Format for Regulatory Submission in R
+### From XPT to Dataset-JSON as Alternative Transport Format for Regulatory Submission in R
 Huan Lu, Neo Yang, Sanofi
 
 *ABSTRACT*CDISC and PHUSE announced a new pilot project aimed at supporting the adoption of Dataset-JSON as an alternative transport format for replacing XPT as the default file format for clinical and device data submissions to regulatory authorities. New standards will be able to take advantage of enhanced capabilities, and drive efficiencies, consistency, and re-usability across the clinical research data life cycle. To leverage the features of Dataset-JSON has become the key for future development of CDISC foundational standards, this presentation will show how R can work with Dataset-JSON, both reading and writing.
 
 
-###DaVinci Journey in the Early Phase Oncology Study
+### DaVinci Journey in the Early Phase Oncology Study
 Yifan Han, Boehringer Ingelheim 
 
 *ABSTRACT*What is DaVinci? DaVinci is an innovative solution at Boehringer Ingelheim to provide Data Access and dynamic Visualization for clinical insight. It enables real time access to clinical trial data and provides tools to review, aggregate and visualize data, which further fastens drug development.
@@ -76,13 +76,13 @@ RENOVATE
 RECIST (v1.1) based data moNitOring Visualization and Analytics Tool for Efficacy RENOVATE is an effective tool to generate evidence from POCP studies. It enables fast decision making for late phase development. It could help visualize the response data, monitor study data during the trial conduct and detect early efficacy signal, etc.
 
 
-###RShiny tool: TDM automation
+### RShiny tool: TDM automation
 Hao Huang, Novartis  
 
 *ABSTRACT*The SDTM Trial Design Model (TDM) is a required part of all CDISC SDTM electronic data submissions. Many colleagues find the TDM creation to be time-consuming and tedious due to a lot of &quot;copy-paste&quot; repetitive work. Additionally, some may feel uncomfortable with the Trial Summary (TS) domain. To enhance the experience of creating TDM for colleagues, we have developed an R ShinyApp-based automation tool, where users only need to upload the study protocol, and the tool will automatically extract the TDM information from protocol using regular expressions. Finally, the tool exports an Excel TDM report for downstream use. The tool also offers optional input fields and customized options to support the creation of a more study specific TDM report. Using this tool, users can easily obtain all the required TS parameter and most commonly used parameters for TS. It also highlights IETEST length over 200 and automatically converts special characters, etc. In practice, it takes only 10 to 40 seconds to complete the task with an acceptable accuracy rate. This tool can significantly enhance your work efficiency and improve your experience of working with TDM in daily work.
 
 
-###Auto Subgroup TLG Generation With R Shiny
+### Auto Subgroup TLG Generation With R Shiny
 Yufan Chen, J&J 
 
 *ABSTRACT*With the aim of eliminating gaps in patient access to new and innovative treatments developed in global pipeline, subgroup analysis for regulatory submission based on multi-regional clinical trial (MRCT) has been conducted more and more frequently by global pharmaceutical companies. The workflow of a subgroup analysis for a statistical programmer includes modifying existing programs from MRCT by performing analysis on a subset of the subjects’ population which involves highly repetitive manual work.
@@ -90,32 +90,32 @@ Yufan Chen, J&J
 This presentation will introduce an automatic approach to modify programs in subgroup analysis. In this new workflow, statistical programmers are armed with a tool that can automate the generation of programs which are ready to be executed to create the outputs that fit the needs of regional regulators. Compared to updating programs one after another manually, this automatic tool helps to improve the efficiency and quality of subgroup analysis. Moreover, the tool can be utilized to produce subgroup versions of programs for any subgroup potentially, i.e., subgroup by sex or age groups.
 
 
-###SAS datasets comparison using R shiny app
+### SAS datasets comparison using R shiny app
 Weiwei Jiao, MSD
 
 *ABSTRACT*A common task for programmers and statisticians is to compare SAS datasets in different folders, which traditionally requires the opening of SAS software and the writing of SAS code. While this is a simple process, it can be time-consuming when performed on a regular basis. The proposed solution leverages the R shiny app to compare SAS datasets, requiring only the input of the SAS dataset path and a simple click to generate comparison results, thus saving both time and effort. The paper will detail different methods of implementing this comparison via the R shiny app and will evaluate the respective advantages and disadvantages of each method.
 
 
-###MediSum Shiny-App: Interactive Data Summarising using Raw Data
+### MediSum Shiny-App: Interactive Data Summarising using Raw Data
 Jingya Wang, Hengrui
 
 *ABSTRACT*In response to the increasing demand for medical reviews and the need for concise data summaries, we developed a SHINY-APP focusing on generating comprehensive tables and plots directly from EDC raw data. Currently supporting demographic tables, adverse event summaries, tumor-related efficacy analyses (e.g., KM plots, waterfall plots), and more. This tool utilizes a JSON-based spec as a guide, allowing adaptability to changes in EDC versions through spec modifications. Furthermore, our app integrates well-known R packages like rtables, tplyr, r2rtf, and Biogen's filter module, enhancing its versatility in data exploration and analysis.
 
 
-###Chevron: A open-source package to facilitate generation of outputs
+### Chevron: A open-source package to facilitate generation of outputs
 Liming Li, Roche
 
 *ABSTRACT*Within the NEST family, we already open-sourced a lot of packages to as the backbone of clinical reporting, including rtables, tern. On top of that, we also have tlg-catalog serving as an example to facilitate the generation of outputs. However, many outputs are standard across multiple studies, and there are only minimal differences across studies. To reduce the effort to create these outputs, we developed a new package, chevron, to bring standard in a user-friendly manner. With chevron, the standards are easily implemented in a scaled manner. Chevron has already been used within Roche in multiple projects. We have also open-sourced chevron to better support you generating the outputs.
 
 
-###R Shiny Tool for Mayo Score Monitoring in UC Study 
+### R Shiny Tool for Mayo Score Monitoring in UC Study 
 Shaoming Liu, Pfizer 
 
 *ABSTRACT*Mayo score is the primary endpoint for UC studies. It includes sub-component of stool frequency and rectal bleeding with raw data collected in daily diary. Calculation of this sub-component for mayo score involves selection of valid days among daily diary data based on bowel preparation date and endoscopy date. It also includes sub-component of endoscopic readings from multiple readers and adjudication. UC study targeting on population with certain UC severity involves inclusion criteria pertaining to disease characteristics, such as inclusion of participants with a 5 to 9 score on the mMS (modified Mayo Score) including an endoscopy sub-score of at least 2, which requires study team to calculate mayo score at screening and/or baseline. This R shiny app is a visualized tool which facilitates study team with mayo score monitoring from various perspective and purposes, including individual daily diary quality check of valid days and sub-scores, review of endoscopic reader's consistency, visualization of mayo score and its sub-component over time. It provides real-time monitoring to enable study team with participants inclusion verification, direct interaction with data, simplified view of complex data from multiple sources, and enhanced knowledge of patterns and trends. Excellent and plaudit feedback for this tool has been received for this tool from study team.
 
 
 
-###Create TLGs and log files by sassy
+### Create TLGs and log files by sassy
 Perphy Zhao, Sanofi 
 
 *ABSTRACT*This paper aims to introduce a newer package called sassy that makes R easier, especially pure SAS programmers to create TLGs and logfiles. This package is a meta-package brings several SAS concept to R, and the programming grammar is highly similar with SAS, including libr which gives programmer the ability to define libnames, generate data dictionaries, and simulate data steps, fmtr which provides functions for formatting data and creating format catalogs, procs which is a set of functions that simulate SASprocedures and includes simulations of FREQ, MEANS, TRANSPOSE, SORT and PRINT procedures, reporter which is a reporting package with easy layout capabilities and the ability to write reports in RTF, DOCX, TXT and HTML file formats, logr which produces a traceable log files, common which is a set of utility functions across the sassy family packages, and often useful in their own right.
