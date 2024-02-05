@@ -1,2 +1,2 @@
-PharmaRUG 2023 website
+PharmaRUG 2024 website
 
