@@ -2,12 +2,15 @@
 title: "Registration now opens"
 ---
 
-Please follow the following [https://docs.qq.com/form/page/DWWFQeElLUEtQQUlk](link).
+Please follow the following [Link](https://docs.qq.com/form/page/DWWFQeElLUEtQQUlk).
 
 
-Please scan the QR code for payment,
+[IMPORTANT] Please scan the QR code for payment, and note that
 
-- attending in person 150 RMB
-- attending online 80 RMB
+- attending in person 150 RMB.
+- attending online 80 RMB.
+- Note `PharmaR` (注明`PharmaR`).
+- Screen save the image, and upload via the registration [link](https://docs.qq.com/form/page/DWWFQeElLUEtQQUlk).
+- Fill out Fapiao information at the end.
 
 <img src="resources/wechatpay.jpg" width="50%">
