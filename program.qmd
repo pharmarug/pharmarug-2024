@@ -19,13 +19,13 @@ title: "China Pharma RUG Meeting Program"
 | 13:00-13:25     | RShiny tool: TDM automation                                                                                   | Hao Huang, Novartis                        | Shanghai          |
 | 13:25-13:50     | Auto Subgroup TLG Generation With R Shiny                                                                     | Yufan Chen, J&J                            | Shanghai          |
 | 13:50-14:15     | SAS datasets comparison using R shiny app                                                                     | Weiwei Jiao, MSD                           | Beijing           |
-| 14:15-14:50     | MediSum Shiny-App: Interactive Data Summarising using Raw Data                                                | Jingya Wang, Hengrui                       | Shanghai          |
-| **14:50-15:20** | **Break**                                                                                                     |                                            |
-| 15:20-15:45     | Chevron: A open-source package to facilitate generation of outputs                                            | Liming Li, Roche                           | Shanghai          |
-| 15:45-16:10     | R Shiny Tool for Mayo Score Monitoring in UC Study                                                            | Shaoming Liu, Pfizer                       | Shanghai          |
-| 16:10-16:35     | Create TLGs and log files by sassy                                                                            | Perphy Zhao, Sanofi                        | Beijing           |
-| 16:35-17:00     | Pending                                                                                                       | Pending                                    | Pending           |
-| 17:00-17:10     | Closing Remarks                                                                                               | Yanli Chang, Novartis                      | Shanghai          |
+| 14:15-14:40     | MediSum Shiny-App: Interactive Data Summarising using Raw Data                                                | Jingya Wang, Hengrui                       | Shanghai          |
+| **14:40-15:10** | **Break**                                                                                                     |                                            |
+| 15:10-15:35     | Chevron: A open-source package to facilitate generation of outputs                                            | Liming Li, Roche                           | Shanghai          |
+| 15:35-16:00     | R Shiny Tool for Mayo Score Monitoring in UC Study                                                            | Shaoming Liu, Pfizer                       | Shanghai          |
+| 16:00-16:25     | Create TLGs and log files by sassy                                                                            | Perphy Zhao, Sanofi                        | Beijing           |
+| 16:25-16:50     | Pending                                                                                                       | Pending                                    | Pending           |
+| 16:50-17:00     | Closing Remarks                                                                                               | Yanli Chang, Novartis                      | Shanghai          |
 
 
 ### Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary}
