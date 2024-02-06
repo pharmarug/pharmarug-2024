@@ -2,6 +2,30 @@
 title: "China Pharma RUG Meeting Program"
 ---
 
+## Program
+
+| Time            | Topic                                                                                                         | Presenter                                  | Location          |
+| --------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ----------------- |
+| **8:30-9:00**   | **Registration**                                                                                              |                                            |
+| 9:00-9:10       | Welcome                                                                                                       | Joe Zhu, Roche; Wang Zhang, MSD            | Beijing, Shanghai |
+| 9:10-9:15       | Opening Remarks                                                                                               | Yan Qiao, BeiGene                          | Beijing           |
+| 9:15-9:45       | <Keynote Speech> Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary}              | Daniel Sjoberg, Roche                      | On-Line           |
+| 9:45-10:10      | Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform | Huadan Li, Zhiping Yan, Dizal              | Beijing           |
+| **10:10-10:40** | **Break**                                                                                                     |                                            |                   |
+| 10:40-11:05     | Leveraging R for Real-Time Data Analysis and Reporting in the AI+HI Paradigm                               | Hao Chen, Beigene                          | Shanghai          |
+| 11:05-11:30     | From XPT to Dataset-JSON as Alternative Transport Format for Regulatory Submission in R                       | Huan Lu, Neo Yang, Sanofi                  | Beijing           |
+| 11:30-11:55     | DaVinci Journey in the Early Phase Oncology Study                                                             | Yifan Han, Boehringer Ingelheim            | Shanghai          |
+| **12:00-13:00** | **Lunch Break**                                                                                               |
+| 13:00-13:25     | RShiny tool: TDM automation                                                                                   | Hao Huang, Novartis                        | Shanghai          |
+| 13:25-13:50     | Auto Subgroup TLG Generation With R Shiny                                                                     | Yufan Chen, J&J                            | Shanghai          |
+| 13:50-14:15     | SAS datasets comparison using R shiny app                                                                     | Weiwei Jiao, MSD                           | Beijing           |
+| 14:15-14:50     | MediSum Shiny-App: Interactive Data Summarising using Raw Data                                                | Jingya Wang, Hengrui                       | Shanghai          |
+| **14:50-15:20** | **Break**                                                                                                     |                                            |
+| 15:20-15:45     | Chevron: A open-source package to facilitate generation of outputs                                            | Liming Li, Roche                           | Shanghai          |
+| 15:45-16:10     | R Shiny Tool for Mayo Score Monitoring in UC Study                                                            | Shaoming Liu, Pfizer                       | Shanghai          |
+| 16:10-16:35     | Create TLGs and log files by sassy                                                                            | Perphy Zhao, Sanofi                        | Beijing           |
+| 16:35-17:00     | Pending                                                                                                       | Pending                                    | Pending           |
+| 17:00-17:10     | Closing Remarks                                                                                               | Yanli Chang, Novartis                      | Shanghai          |
 
 
 ### Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary}
