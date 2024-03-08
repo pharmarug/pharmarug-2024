@@ -19,6 +19,9 @@ website:
         text: Program
         icon: "folder"
   page-footer:
+    left: |
+      Supported by
+      [![](resources/rconsortium.png){fig-alt="Posit" width=120px}](https://www.r-consortium.org/)
     center:
       - text: "Good software engineering practice for R packages"
         href: https://openpharma.github.io/workshop-r-swe/
@@ -26,7 +29,6 @@ website:
         href: https://pharmarug.github.io/pharmarug-2023/
       - text: "Open Source Clinical Reporting summeR"
         href: https://insightsengineering.github.io/nest-2023-summeR/
-
 format:
   html:
     grid:

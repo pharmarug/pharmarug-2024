@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.547">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,7 +45,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -54,6 +60,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -68,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">China Pharma R user group meeting 2024</span>
     </a>
@@ -82,24 +89,24 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target=""><i class="bi bi-house-fill" role="img">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-house-fill" role="img">
 </i> 
- <span class="menu-text">Home</span></a>
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./reg.html" rel="" target=""><i class="bi bi-calendar" role="img">
+    <a class="nav-link" href="./reg.html"> <i class="bi bi-calendar" role="img">
 </i> 
- <span class="menu-text">Registration</span></a>
+<span class="menu-text">Registration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./program.html" rel="" target="" aria-current="page"><i class="bi bi-folder" role="img">
+    <a class="nav-link active" href="./program.html" aria-current="page"> <i class="bi bi-folder" role="img">
 </i> 
- <span class="menu-text">Program</span></a>
+<span class="menu-text">Program</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -126,7 +133,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <section id="program" class="level2">
 <h2 class="anchored" data-anchor-id="program">Program</h2>
@@ -168,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 <td>9:15-9:45</td>
 <td><keynote speech=""> Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary}</keynote></td>
 <td>Daniel Sjoberg, Roche</td>
-<td>On-Line</td>
+<td>Online</td>
 </tr>
 <tr class="odd">
 <td>9:45-10:10</td>
@@ -228,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
 <td>14:15-14:40</td>
 <td>MediSum Shiny-App: Interactive Data Summarising using Raw Data</td>
 <td>Jingya Wang, Hengrui</td>
-<td>Shanghai</td>
+<td>Beijing</td>
 </tr>
 <tr class="odd">
 <td><strong>14:40-15:10</strong></td>
@@ -256,9 +265,9 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>16:25-16:50</td>
-<td>Pending</td>
-<td>Pending</td>
-<td>Pending</td>
+<td>Applying R to Big Data Processing ——Dtplyr as an Example</td>
+<td>Kaiping Yang, Beigene</td>
+<td>Online</td>
 </tr>
 <tr class="even">
 <td>16:50-17:00</td>
@@ -271,7 +280,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="dynamic-cdisc-analysis-results-data-with-the-r-packages-cards-and-gtsummary" class="level3">
 <h3 class="anchored" data-anchor-id="dynamic-cdisc-analysis-results-data-with-the-r-packages-cards-and-gtsummary">Dynamic CDISC Analysis Results Data with the R Packages {cards} and {gtsummary}</h3>
 <p>Daniel Sjoberg, Roche</p>
-<p><em>ABSTRACT</em>The CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis outcomes in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.</p>
+<p><em>ABSTRACT</em></p>
+<p>The CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis outcomes in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.</p>
 <p>The {cards} R package offers a range of functions for ARD generation, from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests.</p>
 <p>The package includes functionalities to represent results in various formats, including JSON and YAML. Thanks to its flexible structures, the {cards} package can be harnessed in diverse applications, such as generating tables for regulatory submissions and conducting quality control checks on existing tables. Furthermore, the {cards} ARD object can be accessed through a REST API, allowing writers to dynamically incorporate table results into reports.</p>
 <p>While {cards} calculates statistics and stores them in a structured object, it cannot present those results; this, however, is where the {gtsummary} package shines. The {gtsummary} package offers a modular framework to construct summary tables. It is the most widely used package for summary tables in the healthcare/pharmaceutical space, and won the American Statistical Association’s 2021 award for Innovation in Statistical Programming and Analytics. The {gtsummary} package is currently being refactored to utilize {cards} as its backend, which will allow users to both extract an ARD object from a {gtsummary} table and use an ARD object to construct a {gtsummary} table.</p>
@@ -280,12 +290,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="optimize-decision-making-efficiency-and-speed-by-performing-exploratory-analysis-through-the-meddrah-platform" class="level3">
 <h3 class="anchored" data-anchor-id="optimize-decision-making-efficiency-and-speed-by-performing-exploratory-analysis-through-the-meddrah-platform">Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform</h3>
 <p>Huadan Li, Zhiping Yan, Dizal</p>
-<p><em>ABSTRACT</em>Medical Data Review and Analysis Hub (MedDRAH /’med’ra:/) is an interactive Web-based real-time clinical trial data monitoring and analysis platform that enables Medical and PV Physicians, Statisticians, and PK Scientists to review, analyze, and generate reports through intuitive point-and-click wizards. The functions below are included in MedDRAH: Review real-time EDC and SDTM data; Generate visual reports for medical data review; Perform comprehensive exploratory analysis utilizing a complete suite of analysis and reporting (A &amp; R) tools; Create the patient narratives; Conduct standardized pharmacokinetic statistical analyses, including assessments of dose-proportionality, food/fed effects, drug-drug interactions (DDI), and exposure-response (E-R) relationships. This presentation will introduce how to design and develop such platform by using R and JavaScript.</p>
+<p><em>ABSTRACT</em></p>
+<p>Medical Data Review and Analysis Hub (MedDRAH /’med’ra:/) is an interactive Web-based real-time clinical trial data monitoring and analysis platform that enables Medical and PV Physicians, Statisticians, and PK Scientists to review, analyze, and generate reports through intuitive point-and-click wizards. The functions below are included in MedDRAH: Review real-time EDC and SDTM data; Generate visual reports for medical data review; Perform comprehensive exploratory analysis utilizing a complete suite of analysis and reporting (A &amp; R) tools; Create the patient narratives; Conduct standardized pharmacokinetic statistical analyses, including assessments of dose-proportionality, food/fed effects, drug-drug interactions (DDI), and exposure-response (E-R) relationships. This presentation will introduce how to design and develop such platform by using R and JavaScript.</p>
 </section>
 <section id="leveraging-r-for-real-time-data-analysis-and-reporting-in-the-aihi-paradigm" class="level3">
 <h3 class="anchored" data-anchor-id="leveraging-r-for-real-time-data-analysis-and-reporting-in-the-aihi-paradigm">Leveraging R for Real-Time Data Analysis and Reporting in the AI+HI Paradigm</h3>
 <p>Hao Chen, Beigene</p>
-<p><em>ABSTRACT</em>R is an excellent programming language for data analysis and reporting, featuring a mature platform developed by Posit@ and a thriving ecosystem within the pharmaceutical industry.</p>
+<p><em>ABSTRACT</em></p>
+<p>R is an excellent programming language for data analysis and reporting, featuring a mature platform developed by Posit@ and a thriving ecosystem within the pharmaceutical industry.</p>
 <p>Being open-source, R offers an extensive codebase that allows AI to learn and improve. This enables the automation of R code comprehension and generation through AI, offering significant potential for the development of AI-powered R applications.</p>
 <p>In parallel, R Shiny offers a superb UI framework that enhances human-computer interaction, integrating AI with human intelligence seamlessly. This presents a valuable opportunity to leverage R for real-time data analysis and reporting within the AI+HI paradigm.</p>
 <p>In our presentation, we will showcase a R Shiny application designed to demonstrate this concept. We will illustrate how this integrated approach can significantly improve efficiency and decision-making in our daily work.</p>
@@ -293,47 +305,65 @@ ul.task-list li input[type="checkbox"] {
 <section id="from-xpt-to-dataset-json-as-alternative-transport-format-for-regulatory-submission-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="from-xpt-to-dataset-json-as-alternative-transport-format-for-regulatory-submission-in-r">From XPT to Dataset-JSON as Alternative Transport Format for Regulatory Submission in R</h3>
 <p>Huan Lu, Neo Yang, Sanofi</p>
-<p><em>ABSTRACT</em>CDISC and PHUSE announced a new pilot project aimed at supporting the adoption of Dataset-JSON as an alternative transport format for replacing XPT as the default file format for clinical and device data submissions to regulatory authorities. New standards will be able to take advantage of enhanced capabilities, and drive efficiencies, consistency, and re-usability across the clinical research data life cycle. To leverage the features of Dataset-JSON has become the key for future development of CDISC foundational standards, this presentation will show how R can work with Dataset-JSON, both reading and writing.</p>
+<p><em>ABSTRACT</em></p>
+<p>CDISC and PHUSE announced a new pilot project aimed at supporting the adoption of Dataset-JSON as an alternative transport format for replacing XPT as the default file format for clinical and device data submissions to regulatory authorities. New standards will be able to take advantage of enhanced capabilities, and drive efficiencies, consistency, and re-usability across the clinical research data life cycle. To leverage the features of Dataset-JSON has become the key for future development of CDISC foundational standards, this presentation will show how R can work with Dataset-JSON, both reading and writing.</p>
 </section>
 <section id="davinci-journey-in-the-early-phase-oncology-study" class="level3">
 <h3 class="anchored" data-anchor-id="davinci-journey-in-the-early-phase-oncology-study">DaVinci Journey in the Early Phase Oncology Study</h3>
 <p>Yifan Han, Boehringer Ingelheim</p>
-<p><em>ABSTRACT</em>What is DaVinci? DaVinci is an innovative solution at Boehringer Ingelheim to provide Data Access and dynamic Visualization for clinical insight. It enables real time access to clinical trial data and provides tools to review, aggregate and visualize data, which further fastens drug development. Apps Multiple Apps were developed and deployed under DaVinci ecosystem. Then they were put into practice and served teams for different purpose. For instance, EBAS mainly focuses on Exploratory Biomarker data Analysis, RENOVATE provides insights in terms of efficacy and Modular DaVinci paves the way for medicine team to monitor data. Moreover, DaVinci ecosystem renders flexibilities for users to include additional customized modules. RENOVATE RECIST (v1.1) based data moNitOring Visualization and Analytics Tool for Efficacy RENOVATE is an effective tool to generate evidence from POCP studies. It enables fast decision making for late phase development. It could help visualize the response data, monitor study data during the trial conduct and detect early efficacy signal, etc.</p>
+<p><em>ABSTRACT</em></p>
+<p>What is DaVinci? DaVinci is an innovative solution at Boehringer Ingelheim to provide Data Access and dynamic Visualization for clinical insight. It enables real time access to clinical trial data and provides tools to review, aggregate and visualize data, which further fastens drug development. Apps Multiple Apps were developed and deployed under DaVinci ecosystem. Then they were put into practice and served teams for different purpose. For instance, EBAS mainly focuses on Exploratory Biomarker data Analysis, RENOVATE provides insights in terms of efficacy and Modular DaVinci paves the way for medicine team to monitor data. Moreover, DaVinci ecosystem renders flexibilities for users to include additional customized modules. RENOVATE RECIST (v1.1) based data moNitOring Visualization and Analytics Tool for Efficacy RENOVATE is an effective tool to generate evidence from POCP studies. It enables fast decision making for late phase development. It could help visualize the response data, monitor study data during the trial conduct and detect early efficacy signal, etc.</p>
 </section>
 <section id="rshiny-tool-tdm-automation" class="level3">
 <h3 class="anchored" data-anchor-id="rshiny-tool-tdm-automation">RShiny tool: TDM automation</h3>
 <p>Hao Huang, Novartis</p>
-<p><em>ABSTRACT</em>The SDTM Trial Design Model (TDM) is a required part of all CDISC SDTM electronic data submissions. Many colleagues find the TDM creation to be time-consuming and tedious due to a lot of "copy-paste" repetitive work. Additionally, some may feel uncomfortable with the Trial Summary (TS) domain. To enhance the experience of creating TDM for colleagues, we have developed an R ShinyApp-based automation tool, where users only need to upload the study protocol, and the tool will automatically extract the TDM information from protocol using regular expressions. Finally, the tool exports an Excel TDM report for downstream use. The tool also offers optional input fields and customized options to support the creation of a more study specific TDM report. Using this tool, users can easily obtain all the required TS parameter and most commonly used parameters for TS. It also highlights IETEST length over 200 and automatically converts special characters, etc. In practice, it takes only 10 to 40 seconds to complete the task with an acceptable accuracy rate. This tool can significantly enhance your work efficiency and improve your experience of working with TDM in daily work.</p>
+<p><em>ABSTRACT</em></p>
+<p>The SDTM Trial Design Model (TDM) is a required part of all CDISC SDTM electronic data submissions. Many colleagues find the TDM creation to be time-consuming and tedious due to a lot of "copy-paste" repetitive work. Additionally, some may feel uncomfortable with the Trial Summary (TS) domain. To enhance the experience of creating TDM for colleagues, we have developed an R ShinyApp-based automation tool, where users only need to upload the study protocol, and the tool will automatically extract the TDM information from protocol using regular expressions. Finally, the tool exports an Excel TDM report for downstream use. The tool also offers optional input fields and customized options to support the creation of a more study specific TDM report. Using this tool, users can easily obtain all the required TS parameter and most commonly used parameters for TS. It also highlights IETEST length over 200 and automatically converts special characters, etc. In practice, it takes only 10 to 40 seconds to complete the task with an acceptable accuracy rate. This tool can significantly enhance your work efficiency and improve your experience of working with TDM in daily work.</p>
 </section>
 <section id="auto-subgroup-tlg-generation-with-r-shiny" class="level3">
 <h3 class="anchored" data-anchor-id="auto-subgroup-tlg-generation-with-r-shiny">Auto Subgroup TLG Generation With R Shiny</h3>
 <p>Yufan Chen, J&amp;J</p>
-<p><em>ABSTRACT</em>With the aim of eliminating gaps in patient access to new and innovative treatments developed in global pipeline, subgroup analysis for regulatory submission based on multi-regional clinical trial (MRCT) has been conducted more and more frequently by global pharmaceutical companies. The workflow of a subgroup analysis for a statistical programmer includes modifying existing programs from MRCT by performing analysis on a subset of the subjects’ population which involves highly repetitive manual work. &nbsp; This presentation will introduce an automatic approach to modify programs in subgroup analysis. In this new workflow, statistical programmers are armed with a tool that can automate the generation of programs which are ready to be executed to create the outputs that fit the needs of regional regulators. Compared to updating programs one after another manually, this automatic tool helps to improve the efficiency and quality of subgroup analysis. Moreover, the tool can be utilized to produce subgroup versions of programs for any subgroup potentially, i.e., subgroup by sex or age groups.</p>
+<p><em>ABSTRACT</em></p>
+<p>With the aim of eliminating gaps in patient access to new and innovative treatments developed in global pipeline, subgroup analysis for regulatory submission based on multi-regional clinical trial (MRCT) has been conducted more and more frequently by global pharmaceutical companies. The workflow of a subgroup analysis for a statistical programmer includes modifying existing programs from MRCT by performing analysis on a subset of the subjects’ population which involves highly repetitive manual work. &nbsp; This presentation will introduce an automatic approach to modify programs in subgroup analysis. In this new workflow, statistical programmers are armed with a tool that can automate the generation of programs which are ready to be executed to create the outputs that fit the needs of regional regulators. Compared to updating programs one after another manually, this automatic tool helps to improve the efficiency and quality of subgroup analysis. Moreover, the tool can be utilized to produce subgroup versions of programs for any subgroup potentially, i.e., subgroup by sex or age groups.</p>
 </section>
 <section id="sas-datasets-comparison-using-r-shiny-app" class="level3">
 <h3 class="anchored" data-anchor-id="sas-datasets-comparison-using-r-shiny-app">SAS datasets comparison using R shiny app</h3>
 <p>Weiwei Jiao, MSD</p>
-<p><em>ABSTRACT</em>A common task for programmers and statisticians is to compare SAS datasets in different folders, which traditionally requires the opening of SAS software and the writing of SAS code. While this is a simple process, it can be time-consuming when performed on a regular basis. The proposed solution leverages the R shiny app to compare SAS datasets, requiring only the input of the SAS dataset path and a simple click to generate comparison results, thus saving both time and effort. The paper will detail different methods of implementing this comparison via the R shiny app and will evaluate the respective advantages and disadvantages of each method.</p>
+<p><em>ABSTRACT</em></p>
+<p>A common task for programmers and statisticians is to compare SAS datasets in different folders, which traditionally requires the opening of SAS software and the writing of SAS code. While this is a simple process, it can be time-consuming when performed on a regular basis. The proposed solution leverages the R shiny app to compare SAS datasets, requiring only the input of the SAS dataset path and a simple click to generate comparison results, thus saving both time and effort. The paper will detail different methods of implementing this comparison via the R shiny app and will evaluate the respective advantages and disadvantages of each method.</p>
 </section>
 <section id="medisum-shiny-app-interactive-data-summarising-using-raw-data" class="level3">
 <h3 class="anchored" data-anchor-id="medisum-shiny-app-interactive-data-summarising-using-raw-data">MediSum Shiny-App: Interactive Data Summarising using Raw Data</h3>
 <p>Jingya Wang, Hengrui</p>
-<p><em>ABSTRACT</em>In response to the increasing demand for medical reviews and the need for concise data summaries, we developed a SHINY-APP focusing on generating comprehensive tables and plots directly from EDC raw data. Currently supporting demographic tables, adverse event summaries, tumor-related efficacy analyses (e.g., KM plots, waterfall plots), and more. This tool utilizes a JSON-based spec as a guide, allowing adaptability to changes in EDC versions through spec modifications. Furthermore, our app integrates well-known R packages like rtables, tplyr, r2rtf, and Biogen’s filter module, enhancing its versatility in data exploration and analysis.</p>
+<p><em>ABSTRACT</em></p>
+<p>In response to the increasing demand for medical reviews and the need for concise data summaries, we developed a SHINY-APP focusing on generating comprehensive tables and plots directly from EDC raw data. Currently supporting demographic tables, adverse event summaries, tumor-related efficacy analyses (e.g., KM plots, waterfall plots), and more. This tool utilizes a JSON-based spec as a guide, allowing adaptability to changes in EDC versions through spec modifications. Furthermore, our app integrates well-known R packages like rtables, tplyr, r2rtf, and Biogen’s filter module, enhancing its versatility in data exploration and analysis.</p>
 </section>
 <section id="chevron-a-open-source-package-to-facilitate-generation-of-outputs" class="level3">
 <h3 class="anchored" data-anchor-id="chevron-a-open-source-package-to-facilitate-generation-of-outputs">Chevron: A open-source package to facilitate generation of outputs</h3>
 <p>Liming Li, Roche</p>
-<p><em>ABSTRACT</em>Within the NEST family, we already open-sourced a lot of packages to as the backbone of clinical reporting, including rtables, tern. On top of that, we also have tlg-catalog serving as an example to facilitate the generation of outputs. However, many outputs are standard across multiple studies, and there are only minimal differences across studies. To reduce the effort to create these outputs, we developed a new package, chevron, to bring standard in a user-friendly manner. With chevron, the standards are easily implemented in a scaled manner. Chevron has already been used within Roche in multiple projects. We have also open-sourced chevron to better support you generating the outputs.</p>
+<p><em>ABSTRACT</em></p>
+<p>Within the NEST family, we already open-sourced a lot of packages to as the backbone of clinical reporting, including rtables, tern. On top of that, we also have tlg-catalog serving as an example to facilitate the generation of outputs. However, many outputs are standard across multiple studies, and there are only minimal differences across studies. To reduce the effort to create these outputs, we developed a new package, chevron, to bring standard in a user-friendly manner. With chevron, the standards are easily implemented in a scaled manner. Chevron has already been used within Roche in multiple projects. We have also open-sourced chevron to better support you generating the outputs.</p>
 </section>
 <section id="r-shiny-tool-for-mayo-score-monitoring-in-uc-study" class="level3">
 <h3 class="anchored" data-anchor-id="r-shiny-tool-for-mayo-score-monitoring-in-uc-study">R Shiny Tool for Mayo Score Monitoring in UC Study</h3>
 <p>Shaoming Liu, Pfizer</p>
-<p><em>ABSTRACT</em>Mayo score is the primary endpoint for UC studies. It includes sub-component of stool frequency and rectal bleeding with raw data collected in daily diary. Calculation of this sub-component for mayo score involves selection of valid days among daily diary data based on bowel preparation date and endoscopy date. It also includes sub-component of endoscopic readings from multiple readers and adjudication. UC study targeting on population with certain UC severity involves inclusion criteria pertaining to disease characteristics, such as inclusion of participants with a 5 to 9 score on the mMS (modified Mayo Score) including an endoscopy sub-score of at least 2, which requires study team to calculate mayo score at screening and/or baseline. This R shiny app is a visualized tool which facilitates study team with mayo score monitoring from various perspective and purposes, including individual daily diary quality check of valid days and sub-scores, review of endoscopic reader’s consistency, visualization of mayo score and its sub-component over time. It provides real-time monitoring to enable study team with participants inclusion verification, direct interaction with data, simplified view of complex data from multiple sources, and enhanced knowledge of patterns and trends. Excellent and plaudit feedback for this tool has been received for this tool from study team.</p>
+<p><em>ABSTRACT</em></p>
+<p>Mayo score is the primary endpoint for UC studies. It includes sub-component of stool frequency and rectal bleeding with raw data collected in daily diary. Calculation of this sub-component for mayo score involves selection of valid days among daily diary data based on bowel preparation date and endoscopy date. It also includes sub-component of endoscopic readings from multiple readers and adjudication. UC study targeting on population with certain UC severity involves inclusion criteria pertaining to disease characteristics, such as inclusion of participants with a 5 to 9 score on the mMS (modified Mayo Score) including an endoscopy sub-score of at least 2, which requires study team to calculate mayo score at screening and/or baseline. This R shiny app is a visualized tool which facilitates study team with mayo score monitoring from various perspective and purposes, including individual daily diary quality check of valid days and sub-scores, review of endoscopic reader’s consistency, visualization of mayo score and its sub-component over time. It provides real-time monitoring to enable study team with participants inclusion verification, direct interaction with data, simplified view of complex data from multiple sources, and enhanced knowledge of patterns and trends. Excellent and plaudit feedback for this tool has been received for this tool from study team.</p>
 </section>
 <section id="create-tlgs-and-log-files-by-sassy" class="level3">
 <h3 class="anchored" data-anchor-id="create-tlgs-and-log-files-by-sassy">Create TLGs and log files by sassy</h3>
 <p>Perphy Zhao, Sanofi</p>
-<p><em>ABSTRACT</em>This paper aims to introduce a newer package called sassy that makes R easier, especially pure SAS programmers to create TLGs and logfiles. This package is a meta-package brings several SAS concept to R, and the programming grammar is highly similar with SAS, including libr which gives programmer the ability to define libnames, generate data dictionaries, and simulate data steps, fmtr which provides functions for formatting data and creating format catalogs, procs which is a set of functions that simulate SASprocedures and includes simulations of FREQ, MEANS, TRANSPOSE, SORT and PRINT procedures, reporter which is a reporting package with easy layout capabilities and the ability to write reports in RTF, DOCX, TXT and HTML file formats, logr which produces a traceable log files, common which is a set of utility functions across the sassy family packages, and often useful in their own right.</p>
+<p><em>ABSTRACT</em></p>
+<p>This paper aims to introduce a newer package called sassy that makes R easier, especially pure SAS programmers to create TLGs and logfiles. This package is a meta-package brings several SAS concept to R, and the programming grammar is highly similar with SAS, including libr which gives programmer the ability to define libnames, generate data dictionaries, and simulate data steps, fmtr which provides functions for formatting data and creating format catalogs, procs which is a set of functions that simulate SASprocedures and includes simulations of FREQ, MEANS, TRANSPOSE, SORT and PRINT procedures, reporter which is a reporting package with easy layout capabilities and the ability to write reports in RTF, DOCX, TXT and HTML file formats, logr which produces a traceable log files, common which is a set of utility functions across the sassy family packages, and often useful in their own right.</p>
+</section>
+<section id="applying-r-to-big-data-processing-dtplyr-as-an-example" class="level3">
+<h3 class="anchored" data-anchor-id="applying-r-to-big-data-processing-dtplyr-as-an-example">Applying R to Big Data Processing ——Dtplyr as an Example</h3>
+<p>Kaiping Yang, Beigene</p>
+<p><em>ABSTRACT</em></p>
+<p><strong>Background</strong> Data analysis in the pharmaceutical industry requires processing large amounts of data, such as clinical trials, genomes, drug reactions, etc. R is a widely used data science tool that provides rich data manipulation and analysis capabilities. data.table is an R package that can efficiently handle large-scale datasets, providing fast sorting, grouping, aggregation, joining, and other operations. dplyr is another R package that provides a concise data manipulation syntax, using verb functions to describe data transformations, such as filtering, selecting, arranging, grouping, summarizing, etc. dtplyr is an R package that combines data.table and dplyr, allowing you to use dplyr’s syntax to operate data.table objects, while taking advantage of data.table’s high performance.</p>
+<p><strong>Purpose</strong> The purpose of this article is to introduce how to use dtplyr to process big data in the pharmaceutical industry, improving data analysis efficiency and readability. This article will show the usage of dtplyr through several examples, including data reading, data cleaning, data processing, and data analysis. This article will compare the performance and ease of use of dtplyr and other R packages, as well as the advantages, disadvantages, and application scenarios of dtplyr.</p>
+<p><strong>Methods</strong> The data used in this article contains millions of rows. The R version used in this article is 4.1.2, and the R packages used are dtplyr, data.table, dplyr, tidyverse, microbenchmark, etc. The dtplyr version used in this article is 1.1.0, using the lazy_dt() function to convert data frames into lazy data table objects, then using dplyr’s verb functions to operate on the data, and finally using the as.data.table() or as_tibble() function to convert the results into data frames or tibble objects. The microbenchmark() function is used to compare the running time of dtplyr and other R packages, and the autoplot() function is used to plot the running time distribution.</p>
+<p><strong>Results</strong> This article shows how to use dtplyr to complete the following tasks: Reading large files: Reading large files: using the fread() function to quickly read large files. Data cleaning: using the filter() function to filter data, using the mutate() function to create or modify variables, using the recode() function to recode variables, using the na.omit() function to delete missing values. Data processing: using the group_by() function to group data, using the summarise() function to summarize data, using the arrange() function to sort data, using the left_join() function to join data. Data analysis: using the count() function to count data, using the top_n() function to select the largest or smallest data, using the ggplot() function to plot the data distribution and relationship. This article compares the performance of dtplyr and other R packages, finding that dtplyr is faster than dplyr in most cases, but slower than data.table, especially in grouping and joining operations, data.table has a clear advantage. This article summarizes the advantages, disadvantages, and application scenarios of dtplyr, considering dtplyr as a compromise between dplyr and data.table, providing dplyr’s ease of use and data.table’s high performance, but also having some limitations, such as not supporting all dplyr functions, not supporting in-place updates, not supporting distributed computing, etc.</p>
 
 
 </section>
@@ -419,10 +449,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -432,8 +461,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -446,6 +484,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -489,6 +646,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -514,6 +672,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -577,18 +761,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Supported by <a href="https://www.r-consortium.org/"><img src="resources/rconsortium.png" class="img-fluid" alt="Posit" width="120"></a></p>
+</div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="https://openpharma.github.io/workshop-r-swe/">Good software engineering practice for R packages</a>
+    <a class="nav-link" href="https://openpharma.github.io/workshop-r-swe/">
+<p>Good software engineering practice for R packages</p>
+</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="https://pharmarug.github.io/pharmarug-2023/">PharmaRUG 2023</a>
+    <a class="nav-link" href="https://pharmarug.github.io/pharmarug-2023/">
+<p>PharmaRUG 2023</p>
+</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="https://insightsengineering.github.io/nest-2023-summeR/">Open Source Clinical Reporting summeR</a>
+    <a class="nav-link" href="https://insightsengineering.github.io/nest-2023-summeR/">
+<p>Open Source Clinical Reporting summeR</p>
+</a>
   </li>  
 </ul>
     </div>
@@ -597,6 +787,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 
