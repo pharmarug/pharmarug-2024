@@ -14,7 +14,7 @@ title: "China Pharma RUG Meeting Program"
 | **10:10-10:40** | **Break**                                                                                                     |                                            |                   |
 | 10:40-11:05     | Leveraging R for Real-Time Data Analysis and Reporting in the AI+HI Paradigm                               | Hao Chen, Beigene                          | Shanghai          |
 | 11:05-11:30     | From XPT to Dataset-JSON as Alternative Transport Format for Regulatory Submission in R                       | Huan Lu, Neo Yang, Sanofi                  | Beijing           |
-| 11:30-11:55     | DaVinci Journey in the Early Phase Oncology Study                                                             | Yifan Han, Boehringer Ingelheim            | Shanghai          |
+| 11:30-11:55     | Create TLGs and log files by sassy                                                                            | Perphy Zhao, Sanofi                        | Beijing           |
 | **12:00-13:00** | **Lunch Break**                                                                                               |
 | 13:00-13:25     | RShiny tool: TDM automation                                                                                   | Hao Huang, Novartis                        | Shanghai          |
 | 13:25-13:50     | Auto Subgroup TLG Generation With R Shiny                                                                     | Yufan Chen, J&J                            | Shanghai          |
@@ -23,7 +23,7 @@ title: "China Pharma RUG Meeting Program"
 | **14:40-15:10** | **Break**                                                                                                     |                                            |
 | 15:10-15:35     | Chevron: A open-source package to facilitate generation of outputs                                            | Liming Li, Roche                           | Shanghai          |
 | 15:35-16:00     | R Shiny Tool for Mayo Score Monitoring in UC Study                                                            | Shaoming Liu, Pfizer                       | Shanghai          |
-| 16:00-16:25     | Create TLGs and log files by sassy                                                                            | Perphy Zhao, Sanofi                        | Beijing           |
+| 16:00-16:25     | DaVinci Journey in the Early Phase Oncology Study                                                             | Yifan Han, Boehringer Ingelheim            | Shanghai          |
 | 16:25-16:50     | Applying R to Big Data Processing ——Dtplyr as an Example                                                      | Kaiping Yang, Beigene                       |    Online        |
 | 16:50-17:00     | Closing Remarks                                                                                               | Yanli Chang, Novartis                      | Shanghai          |
 
