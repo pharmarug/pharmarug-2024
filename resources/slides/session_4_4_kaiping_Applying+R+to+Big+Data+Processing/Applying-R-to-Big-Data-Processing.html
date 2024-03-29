@@ -19,10 +19,6 @@
     <script src="Applying-R-to-Big-Data-Processing_files/xaringanExtra-progressBar/progress-bar.js"></script>
     <link href="Applying-R-to-Big-Data-Processing_files/panelset/panelset.css" rel="stylesheet" />
     <script src="Applying-R-to-Big-Data-Processing_files/panelset/panelset.js"></script>
-    <script src="Applying-R-to-Big-Data-Processing_files/htmlwidgets/htmlwidgets.js"></script>
-    <script src="Applying-R-to-Big-Data-Processing_files/viz/viz.js"></script>
-    <link href="Applying-R-to-Big-Data-Processing_files/DiagrammeR-styles/styles.css" rel="stylesheet" />
-    <script src="Applying-R-to-Big-Data-Processing_files/grViz-binding/grViz.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -70,19 +66,53 @@ class: center, middle, inverse, title-slide
   100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
 }</style>
 
+&lt;style type="text/css"&gt;
+.remark-code {
+  max-height: 500px;
+}
+&lt;/style&gt;
+
 ## Background
 
+#### Pharmaceutical Research
+##### Clinical Trial Data Analysis
+- During the development of new drugs, clinical trials generate a large amount of data on drug safety, efficacy, and dose-response relationships.
+- Big data analytics enables researchers to identify drug effects more quickly and accurately, and to assess risks and benefits.  
+
+##### Genomics and Bioinformatics
+- As the cost of genome sequencing decreases, vast amounts of genomic data are used to understand disease mechanisms, discover new targets, and develop personalized medicines.  
+- Big data analysis techniques can process these complex data, accelerating the development of precision medicine.
+
+##### Drug Repurposing
+- Analyzing data from existing drugs can reveal new uses for old drugs, significantly reducing the cost and time of drug development.  
+
+---
+
+## Background
+
+#### Real-World Studies
+##### Drug Effectiveness and Safety Assessment
+- Evaluating the real-world effectiveness and safety of drugs using observational studies and patient-reported outcomes.
+
+##### Medical Decision Support
+- Providing healthcare professionals with data-driven insights to support clinical decision-making.
+
+##### Personalized Medicine and Precision Treatment
+- Utilizing real-world data to tailor treatments to individual patients, improving outcomes and minimizing adverse effects.
+
+---
 ### dplyr api flowchart
 
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5b7d99df952ba704dcc8" style="width:100%;height:252px;"></div>
-<script type="application/json" data-for="htmlwidget-5b7d99df952ba704dcc8">{"x":{"diagram":"digraph {\ngraph [layout = dot, rankdir = LR]\nnode [shape = rectangle, style = filled, fillcolor = Linen]\n\n\"dplyr\" -> \"dtplyr\" -> \"data.table\"\n\"dplyr\" -> \"dbplyr\" -> \"database\"\n\"dplyr\" -> \"sparklyr\" ->\"spark\"\n\"dplyr\" -> \"arrow\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+
+&lt;center&gt;&lt;img src="files/dplyr api flowchart.png" height="500px" /&gt;&lt;/center&gt;
 ---
 
 ### dtplyr api
 
 .panelset[
 
-.panel[.panel-name[dbplyr]
+.panel[.panel-name[dtplyr]
 
 ```r
 library(data.table)
@@ -267,22 +297,22 @@ results_spark &lt;- iris_spark %&gt;%
   filter(Sepal_Length &gt; 5.0)
 results_spark
 ```
-
 ```
-## # Source: spark&lt;?&gt; [?? x 2]
-##    Species Sepal_Length
-##    &lt;chr&gt;          &lt;dbl&gt;
-##  1 setosa           5.1
-##  2 setosa           5.4
-##  3 setosa           5.4
-##  4 setosa           5.8
-##  5 setosa           5.7
-##  6 setosa           5.4
-##  7 setosa           5.1
-##  8 setosa           5.7
-##  9 setosa           5.1
-## 10 setosa           5.4
-## # ℹ more rows
+# Source: spark&lt;?&gt; [?? x 2]
+   Species Sepal_Length
+   &lt;chr&gt;          &lt;dbl&gt;
+ 1 setosa           5.1
+ 2 setosa           5.4
+ 3 setosa           5.4
+ 4 setosa           5.8
+ 5 setosa           5.7
+ 6 setosa           5.4
+ 7 setosa           5.1
+ 8 setosa           5.7
+ 9 setosa           5.1
+10 setosa           5.4
+# ℹ more rows
+# ℹ Use `print(n = ...)` to see more rows
 ```
 ]
 
@@ -290,21 +320,15 @@ results_spark
 
 ```r
 class(results_spark)
-```
-
-```
-## [1] "tbl_spark" "tbl_sql"   "tbl_lazy"  "tbl"
-```
-
-```r
 results_spark %&gt;% show_query()
 ```
-
 ```
-## &lt;SQL&gt;
-## SELECT `Species`, `Sepal_Length`
-## FROM `iris_spark`
-## WHERE (`Sepal_Length` &gt; 5.0)
+[1] "tbl_spark" "tbl_sql"   "tbl_lazy"  "tbl"
+
+&lt;SQL&gt;
+SELECT `Species`, `Sepal_Length`
+FROM `iris_spark`
+WHERE (`Sepal_Length` &gt; 5.0)
 ```
 ]
 
@@ -313,27 +337,24 @@ results_spark %&gt;% show_query()
 ```r
 results &lt;- results_spark %&gt;% collect()
 results
-```
-
-```
-## # A tibble: 118 × 2
-##    Species Sepal_Length
-##    &lt;chr&gt;          &lt;dbl&gt;
-##  1 setosa           5.1
-##  2 setosa           5.4
-##  3 setosa           5.4
-##  4 setosa           5.8
-##  5 setosa           5.7
-##  6 setosa           5.4
-##  7 setosa           5.1
-##  8 setosa           5.7
-##  9 setosa           5.1
-## 10 setosa           5.4
-## # ℹ 108 more rows
-```
-
-```r
 spark_disconnect(sc)
+```
+```
+# A tibble: 118 × 2
+   Species Sepal_Length
+   &lt;chr&gt;          &lt;dbl&gt;
+ 1 setosa           5.1
+ 2 setosa           5.4
+ 3 setosa           5.4
+ 4 setosa           5.8
+ 5 setosa           5.7
+ 6 setosa           5.4
+ 7 setosa           5.1
+ 8 setosa           5.7
+ 9 setosa           5.1
+10 setosa           5.4
+# ℹ 108 more rows
+# ℹ Use `print(n = ...)` to see more rows
 ```
 ]
 
@@ -434,6 +455,134 @@ library(knitr)
 
 ---
 
+## Introduction of data.table
+
+### Why `data.table`?
+
+* concise syntax: fast to type, fast to read
+* fast speed
+* memory efficient
+* careful API lifecycle management
+* community
+* feature rich
+
+---
+
+### Features
+
+* fast and friendly delimited **file reader**: **[`?fread`](https://rdatatable.gitlab.io/data.table/reference/fread.html)**, see also [convenience features for _small_ data](https://github.com/Rdatatable/data.table/wiki/Convenience-features-of-fread)
+* fast and feature rich delimited **file writer**: **[`?fwrite`](https://rdatatable.gitlab.io/data.table/reference/fwrite.html)**
+* low-level **parallelism**: many common operations are internally parallelized to use multiple CPU threads
+* fast and scalable aggregations; e.g. 100GB in RAM (see [benchmarks](https://duckdblabs.github.io/db-benchmark/) on up to **two billion rows**)
+* fast and feature rich joins: **ordered joins** (e.g. rolling forwards, backwards, nearest and limited staleness), **[overlapping range joins](https://github.com/Rdatatable/data.table/wiki/talks/EARL2014_OverlapRangeJoin_Arun.pdf)** (similar to `IRanges::findOverlaps`), **[non-equi joins](https://github.com/Rdatatable/data.table/wiki/talks/ArunSrinivasanUseR2016.pdf)** (i.e. joins using operators `&gt;, &gt;=, &lt;, &lt;=`), **aggregate on join** (`by=.EACHI`), **update on join**
+* fast add/update/delete columns **by reference** by group using no copies at all
+* fast and feature rich **reshaping** data: **[`?dcast`](https://rdatatable.gitlab.io/data.table/reference/dcast.data.table.html)** (_pivot/wider/spread_) and **[`?melt`](https://rdatatable.gitlab.io/data.table/reference/melt.data.table.html)** (_unpivot/longer/gather_)
+* **any R function from any R package** can be used in queries not just the subset of functions made available by a database backend, also columns of type `list` are supported
+* has **[no dependencies](https://en.wikipedia.org/wiki/Dependency_hell)** at all other than base R itself, for simpler production/maintenance
+* the R dependency is **as old as possible for as long as possible**, dated April 2014, and we continuously test against that version; e.g. v1.11.0 released on 5 May 2018 bumped the dependency up from 5 year old R 3.0.0 to 4 year old R 3.1.0
+
+---
+
+### data.table syntax
+
+
+
+```r
+library(data.table)
+DT = as.data.table(iris)
+# FROM[WHERE, SELECT, GROUP BY]
+# DT  [i,     j,      by]
+
+DT[Petal.Width &gt; 1.0, mean(Petal.Length), by = Species]
+#      Species       V1
+#1: versicolor 4.362791
+#2:  virginica 5.552000
+```
+&lt;center&gt;&lt;img src="files/data table syntax.png" height="300px" /&gt;&lt;/center&gt;
+---
+
+### Function reference
+* **between() `%between%` inrange() `%inrange%`**: Convenience functions for range subsets.
+* **fcoalesce()**: Coalescing missing values
+* **duplicated(&lt;data.table&gt;) unique(&lt;data.table&gt;) anyDuplicated(&lt;data.table&gt;) uniqueN()**: Determine Duplicate Rows
+* **fcase()**:fast case when 
+* **fifelse()**: Fast if-else
+* **fsort()**: Fast parallel sort
+* **first() last()**: First/last item of an object
+* **like() `%like%` `%ilike%` `%flike%` `%plike%`**: Convenience function for calling grep.
+* **na.omit(&lt;data.table&gt;)**: Remove rows with missing values on columns specified
+* **nafill() setnafill()**: Fill missing values
+* **`%notin%`**: Convenience operator for checking if an example is not in a set of elements
+* **fintersect() fsetdiff() funion() fsetequal()**: Set operations for data tables
+* **shift()**: Fast lead/lag for vectors and lists
+
+---
+
+### any R function from any R package
+
+.panelset[
+
+.panel[.panel-name[simulated data]
+
+```r
+set.seed(123)  
+x = rnorm(200)
+df &lt;- data.table(  
+  group = rep(c("A", "B"), each = 100),  
+  x = rnorm(200),  
+  y = rnorm(200) + 0.5 * x + rnorm(200, sd = 0.2)
+)
+```
+```
+      group          x            y
+     &lt;char&gt;      &lt;num&gt;        &lt;num&gt;
+  1:      A  2.1988103 -0.138991390
+  2:      A  1.3124130 -1.289209562
+  3:      A -0.2651451  0.137939824
+  4:      A  0.5431941 -0.296800882
+  5:      A -0.4143399  0.893416905
+ ---                               
+196:      B  1.5039006  0.006455795
+197:      B -0.7741449  0.250878838
+198:      B  0.8457315 -2.656341062
+199:      B -1.2606829  0.921820920
+200:      B -0.3545424  1.396673491
+```
+]
+
+.panel[.panel-name[r base]
+
+```r
+groups &lt;- split(df, df$group)
+lapply(groups, function(groups) coef(lm(y ~ x, data = groups))["x"])
+```
+```
+$A
+          x 
+-0.08606835 
+
+$B
+          x 
+-0.02820232 
+```
+]
+
+.panel[.panel-name[in data.table]
+
+```r
+df[ , coef(lm(y ~ x))['x'], by = group]
+```
+```
+    group          V1
+   &lt;char&gt;       &lt;num&gt;
+1:      A -0.08606835
+2:      B -0.02820232
+```
+]
+
+]
+---
+
 ## import data
 
 .panelset[
@@ -443,6 +592,7 @@ library(knitr)
 ```r
 set.seed(123)
 nrows = 1e7
+# nrows = 1e2
 ADLB &lt;- tibble(
   STUDYID = rep("StudyXYZ", nrows),
   USUBJID = paste("SUBJ", sprintf("%08d", 1:nrows), sep = ""),
@@ -469,17 +619,16 @@ head(ADLB)
 ADLB &lt;- vroom::vroom("data/ADLB.csv")
 head(ADLB)
 ```
-
 ```
-## # A tibble: 6 × 11
-##   STUDYID  USUBJID  SAFFL EFFFL COHORT TRT01A PARAMCD  AVAL AVISIT AVISITN ABLFL
-##   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;
-## 1 StudyXYZ SUBJ000… N     Y     B      DrugX  AST     178.  Week 8       4 N    
-## 2 StudyXYZ SUBJ000… Y     Y     C      DrugY  LDH     108.  Week 4       3 N    
-## 3 StudyXYZ SUBJ000… Y     Y     A      DrugY  BILI    108.  Week 8       4 N    
-## 4 StudyXYZ SUBJ000… N     N     B      DrugY  ALP      62.1 Week 1       2 N    
-## 5 StudyXYZ SUBJ000… Y     N     C      DrugY  AST     128.  Week 8       4 Y    
-## 6 StudyXYZ SUBJ000… Y     N     C      Place… ALP     229.  Week 4       3 N
+# A tibble: 6 × 11
+  STUDYID  USUBJID      SAFFL EFFFL COHORT TRT01A  PARAMCD  AVAL AVISIT   AVISITN ABLFL
+  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;
+1 StudyXYZ SUBJ00000001 Y     Y     B      DrugY   BILI    180.  Week 8         4 N    
+2 StudyXYZ SUBJ00000002 Y     Y     C      DrugX   ALT     144.  Week 1         2 N    
+3 StudyXYZ SUBJ00000003 Y     Y     A      DrugX   GGT     108   Week 4         3 N    
+4 StudyXYZ SUBJ00000004 N     Y     C      Placebo LDH      41.2 Week 8         4 N    
+5 StudyXYZ SUBJ00000005 N     Y     A      DrugX   LDH      36.7 Week 8         4 N    
+6 StudyXYZ SUBJ00000006 Y     Y     C      Placebo LDH     123.  Baseline       1 N 
 ```
 ]
 
@@ -489,24 +638,14 @@ head(ADLB)
 ADLB_dt &lt;- as.data.table(ADLB)
 head(ADLB_dt)
 ```
-
 ```
-##     STUDYID      USUBJID  SAFFL  EFFFL COHORT  TRT01A PARAMCD  AVAL AVISIT
-##      &lt;char&gt;       &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt;  &lt;char&gt;  &lt;char&gt; &lt;num&gt; &lt;char&gt;
-## 1: StudyXYZ SUBJ00000001      N      Y      B   DrugX     AST 177.6 Week 8
-## 2: StudyXYZ SUBJ00000002      Y      Y      C   DrugY     LDH 108.5 Week 4
-## 3: StudyXYZ SUBJ00000003      Y      Y      A   DrugY    BILI 107.6 Week 8
-## 4: StudyXYZ SUBJ00000004      N      N      B   DrugY     ALP  62.1 Week 1
-## 5: StudyXYZ SUBJ00000005      Y      N      C   DrugY     AST 127.6 Week 8
-## 6: StudyXYZ SUBJ00000006      Y      N      C Placebo     ALP 228.6 Week 4
-##    AVISITN  ABLFL
-##      &lt;num&gt; &lt;char&gt;
-## 1:       4      N
-## 2:       3      N
-## 3:       4      N
-## 4:       2      N
-## 5:       4      Y
-## 6:       3      N
+    STUDYID      USUBJID SAFFL EFFFL COHORT  TRT01A PARAMCD  AVAL   AVISIT AVISITN ABLFL
+1: StudyXYZ SUBJ00000001     Y     Y      B   DrugY    BILI 180.4   Week 8       4     N
+2: StudyXYZ SUBJ00000002     Y     Y      C   DrugX     ALT 143.7   Week 1       2     N
+3: StudyXYZ SUBJ00000003     Y     Y      A   DrugX     GGT 108.0   Week 4       3     N
+4: StudyXYZ SUBJ00000004     N     Y      C Placebo     LDH  41.2   Week 8       4     N
+5: StudyXYZ SUBJ00000005     N     Y      A   DrugX     LDH  36.7   Week 8       4     N
+6: StudyXYZ SUBJ00000006     Y     Y      C Placebo     LDH 123.2 Baseline       1     N
 ```
 ]
 
@@ -516,22 +655,22 @@ head(ADLB_dt)
 ADLB_lazy_dt &lt;- lazy_dt(ADLB)
 ADLB_lazy_dt
 ```
-
 ```
-## Source: local data table [10,000,000 x 11]
-## Call:   `_DT2`
-## 
-##   STUDYID  USUBJID  SAFFL EFFFL COHORT TRT01A PARAMCD  AVAL AVISIT AVISITN ABLFL
-##   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;
-## 1 StudyXYZ SUBJ000… N     Y     B      DrugX  AST     178.  Week 8       4 N    
-## 2 StudyXYZ SUBJ000… Y     Y     C      DrugY  LDH     108.  Week 4       3 N    
-## 3 StudyXYZ SUBJ000… Y     Y     A      DrugY  BILI    108.  Week 8       4 N    
-## 4 StudyXYZ SUBJ000… N     N     B      DrugY  ALP      62.1 Week 1       2 N    
-## 5 StudyXYZ SUBJ000… Y     N     C      DrugY  AST     128.  Week 8       4 Y    
-## 6 StudyXYZ SUBJ000… Y     N     C      Place… ALP     229.  Week 4       3 N    
-## # ℹ 9,999,994 more rows
-## 
-## # Use as.data.table()/as.data.frame()/as_tibble() to access results
+Source: local data table [10,000,000 x 11]
+Call:   `_DT1`
+
+  STUDYID  USUBJID      SAFFL EFFFL COHORT TRT01A  PARAMCD  AVAL AVISIT   AVISITN ABLFL
+  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;
+1 StudyXYZ SUBJ00000001 Y     Y     B      DrugY   BILI    180.  Week 8         4 N    
+2 StudyXYZ SUBJ00000002 Y     Y     C      DrugX   ALT     144.  Week 1         2 N    
+3 StudyXYZ SUBJ00000003 Y     Y     A      DrugX   GGT     108   Week 4         3 N    
+4 StudyXYZ SUBJ00000004 N     Y     C      Placebo LDH      41.2 Week 8         4 N    
+5 StudyXYZ SUBJ00000005 N     Y     A      DrugX   LDH      36.7 Week 8         4 N    
+6 StudyXYZ SUBJ00000006 Y     Y     C      Placebo LDH     123.  Baseline       1 N    
+# ℹ 9,999,994 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+# Use as.data.table()/as.data.frame()/as_tibble() to access results
 ```
 ]
 
@@ -559,20 +698,69 @@ ADLB_lazy_dt
 
 ---
 
-## Results
+### Performance Comparison
+- fast function of data.table
 
-- **Tasks with dtplyr**:
-  - Reading large files with `fread()`.
-  - Data cleaning with `filter()`, `mutate()`, `recode()`, and `na.omit()`.
-  - Data processing with `group_by()`, `summarise()`, `arrange()`, and `left_join()`.
-  - Data analysis with `count()`, `top_n()`, and `ggplot()` for visualization.
-- **Performance Comparison**:
-  - dtplyr is generally faster than dplyr.
-  - data.table outperforms in grouping and joining operations.
-- **Pros &amp; Cons of dtplyr**:
-  - A compromise between dplyr and data.table.
-  - High performance with ease of use.
-  - Limitations include limited dplyr function support, no in-place updates, and no distributed computing.
+.panelset[
+
+.panel[.panel-name[fsort]
+
+```r
+x = runif(1e6)
+system.time(ans1 &lt;- sort(x, method="quick"))
+#&gt;    user  system elapsed 
+#&gt;   0.109   0.003   0.113 
+system.time(ans2 &lt;- fsort(x))
+#&gt;    user  system elapsed 
+#&gt;   0.027   0.002   0.028 
+identical(ans1, ans2)
+#&gt; [1] TRUE
+```
+]
+
+.panel[.panel-name[fifelse]
+
+```r
+microbenchmark(
+  ifelse = ifelse(x &gt; 0.5, 1, 0),
+  if_else = if_else(x &gt; 0.5, 1, 0),
+  fifelse = fifelse(x &gt; 0.5, 1, 0),
+  times = 10
+)
+```
+```
+Unit: milliseconds
+    expr       min        lq      mean    median        uq       max neval
+  ifelse 23.448985 23.635879 23.732932 23.739346 23.860450 23.930417    10
+ if_else 33.108476 33.186554 33.429599 33.471577 33.643490 33.780251    10
+ fifelse  4.579173  4.620743  4.720137  4.675604  4.724404  5.215244    10
+```
+]
+
+.panel[.panel-name[fcase]
+
+```r
+microbenchmark(
+  case_when = case_when(
+    x &lt; 0.5 ~ 0,
+    x &gt;= 0.5 ~ 1
+  ),
+  fcase = fcase(
+    x &lt; 0.5, 0,
+    x &gt;= 0.5, 1
+  ),
+  times = 10
+)
+```
+```
+Unit: milliseconds
+      expr      min       lq     mean   median       uq      max neval
+ case_when 39.61633 39.81768 40.12419 39.93951 40.30975 41.18214    10
+     fcase 13.68499 13.89618 14.20279 13.98189 14.21023 15.90134    10
+```
+]
+
+]
 
 ---
 
@@ -606,7 +794,7 @@ microbenchmark(
 ---
 
 ### Performance Comparison
-- Data cleaning with `filter()`, `mutate()`, `recode()`, and `na.omit()`.
+- Data cleaning with `filter()`, `mutate()`.
 
 .panelset[
 
@@ -661,7 +849,7 @@ microbenchmark(
 
 ### Performance Comparison
 &lt;!-- Database-like ops benchmark --&gt;
-- Data processing with `group_by()`, `summarise()`, `arrange()`, and `left_join()`.
+- Data processing with `group_by()`, `left_join()`.
 
 .panelset[
 
@@ -767,9 +955,263 @@ microbenchmark(
 
 ---
 
+## Results
+
+- **Tasks with dtplyr**:
+  - Reading large files with `fread()`.
+  - Data cleaning with `filter()`, `mutate()`, `recode()`, and `na.omit()`.
+  - Data processing with `group_by()`, `summarise()`, `arrange()`, and `left_join()`.
+  - Data analysis with `count()`, `top_n()`, and `ggplot()` for visualization.
+- **Performance Comparison**:
+  - dtplyr is generally faster than dplyr.
+  - data.table outperforms in grouping and joining operations.
+- **Pros &amp; Cons of dtplyr**:
+  - A compromise between dplyr and data.table.
+  - High performance with ease of use.
+  - Limitations include limited dplyr function support, no in-place updates, and no distributed computing.
+
+---
+
 ## Case Study
 
-To be continued...
+### Biomarker anaysis: Post-hoc anaysis dataset
+- The dataset has 1.24 million rows and 31 columns
+- The dataset included the results of standard post hoc analyses of different biomarkers
+
+
+### Real world research: Drug sales dataset 
+- The dataset has 4.21 million rows and 36 columns
+- The dataset records the sales information of each drug every day.
+### Real world research: symphony database
+- The dataset has 4.64 billion rows
+- The dataset contains 10 years of data on Medicare claims diagnoses in the United States
+---
+
+### Post-hoc anaysis dataset 
+
+.panelset[
+
+.panel[.panel-name[dataset]
+
+```r
+head(result_data_raw)
+```
+```
+# A tibble: 6 × 22
+  Type  BMK_N…¹ Endpo…² Model Effect Descr…³ TRT   BMK      Pval    EST    LWR    UPR FREQN
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1 BMUT… ALL     DCR     ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+2 BMUT… ALL     OBJR    ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+3 BMUT… ALL     OS      ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+4 BMUT… ALL     PFS     ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+5 BMUT… BMUT_A… DCR     "Pre… Predi… (T/C @… T/C   L1/L0     xxx    xxx    xxx    xxx  xxx 
+6 BMUT… BMUT_A… DCR     "Pre… Progn… L1/L0 … C     L1/L0     xxx    xxx    xxx    xxx  xxx
+# … with 9 more variables: FREQN1 &lt;chr&gt;, FREQN2 &lt;chr&gt;, KMMEDI &lt;chr&gt;, KMMEDI1 &lt;chr&gt;,
+#   KMMEDI2 &lt;chr&gt;, LRT_PVAL &lt;dbl&gt;, RESRATE &lt;chr&gt;, RESRATE1 &lt;chr&gt;, RESRATE2 &lt;chr&gt;, and
+#   abbreviated variable names ¹​BMK_Name, ²​Endpoint, ³​Description
+# ℹ Use `colnames()` to see all variable names
+```
+]
+
+.panel[.panel-name[dplyr]
+
+```r
+get_bmk_rank &lt;- function(result_data_raw){
+  Cutoffs &lt;- result_data_raw %&gt;% distinct(Type,BMK_Name) %&gt;% 
+    mutate(Cutoff=str_extract(BMK_Name,"__\\w+?$") %&gt;% str_remove('^__') %&gt;% coalesce('Default')) 
+  Effects &lt;- result_data_raw %&gt;% distinct(Model,Effect) %&gt;% 
+    mutate(Effect1 = ifelse(Model == 'Predictive' &amp; Effect=='Prognostic', "Prognostic ", Effect)) 
+  BMK_Names &lt;- result_data_raw %&gt;% distinct(Type,BMK_Name,Effect) %&gt;% 
+    filter(Effect == "Prog + Pred" | (Type != "" &amp; BMK_Name == "ALL")) %&gt;% distinct(paste(Type,BMK_Name)) %&gt;% pull()
+  result_data_raw %&gt;%
+    filter(paste(Type,BMK_Name) %in% BMK_Names) %&gt;% 
+    arrange(Type) %&gt;% 
+    mutate(
+      Pval = round(Pval, 4),LRT_PVAL = round(LRT_PVAL, 4),
+      Estimate = glue("{v}({l}, {u})",v = sprintf("%.2f", EST),l = sprintf("%.2f", LWR), u = sprintf("%.2f", UPR))
+    ) %&gt;%
+    left_join(Cutoffs,by=c("Type","BMK_Name")) %&gt;% left_join(Effects,by=c("Model","Effect")) %&gt;% 
+    select(-Effect) %&gt;%
+    mutate(Type = str_to_upper(Type),
+           BMK_Name = ifelse(BMK_Name == "ALL",paste(str_to_upper(Type),"ALL",sep = "__"),BMK_Name)) %&gt;% 
+    rename(Biomarker = BMK_Name, Effect = Effect1, P_value = Pval
+    )
+}
+```
+]
+
+.panel[.panel-name[dtplyr]
+
+```r
+get_bmk_rank_dt &lt;- function(result_data_raw){
+  result_data_raw_lazy_dt &lt;- lazy_dt(result_data_raw)
+  Cutoffs &lt;- result_data_raw_lazy_dt %&gt;% distinct(Type,BMK_Name) %&gt;% 
+    mutate(Cutoff=str_extract(BMK_Name,"__\\w+?$") %&gt;% str_remove('^__') %&gt;% coalesce('Default')) 
+  Effects &lt;- result_data_raw_lazy_dt %&gt;% distinct(Model,Effect) %&gt;% 
+    mutate(Effect1 = ifelse(Model == 'Predictive' &amp; Effect=='Prognostic', "Prognostic ", Effect)) 
+  BMK_Names &lt;- result_data_raw_lazy_dt %&gt;% distinct(Type,BMK_Name,Effect) %&gt;% 
+    filter(Effect == "Prog + Pred" | (Type != "" &amp; BMK_Name == "ALL")) %&gt;% distinct(paste(Type,BMK_Name)) %&gt;% pull()
+  result_data_raw_lazy_dt %&gt;%
+    filter(paste(Type,BMK_Name) %in% BMK_Names) %&gt;% 
+    arrange(Type) %&gt;% 
+    mutate(
+      Pval = round(Pval, 4),LRT_PVAL = round(LRT_PVAL, 4),
+      Estimate = glue("{v}({l}, {u})",v = sprintf("%.2f", EST),l = sprintf("%.2f", LWR), u = sprintf("%.2f", UPR))
+    ) %&gt;%
+    left_join(Cutoffs,by=c("Type","BMK_Name")) %&gt;% left_join(Effects,by=c("Model","Effect")) %&gt;% 
+    select(-Effect) %&gt;%
+    mutate(Type = str_to_upper(Type),
+           BMK_Name = ifelse(BMK_Name == "ALL",paste(str_to_upper(Type),"ALL",sep = "__"),BMK_Name)) %&gt;% 
+    rename(Biomarker = BMK_Name, Effect = Effect1, P_value = Pval
+    ) %&gt;% as_tibble()
+}
+```
+]
+
+.panel[.panel-name[microbenchmark]
+
+```r
+microbenchmark::microbenchmark(
+  get_bmk_rank(result_data_raw),
+  get_bmk_rank_dt(result_data_raw),
+  times = 10
+)
+# Unit: seconds
+#             expr       min        lq      mean    median        uq       max neval cld
+#     get_bmk_rank 10.678574 11.063172 11.326080 11.279834 11.717900 11.816315    10   b
+#  get_bmk_rank_dt  2.902138  3.398134  3.830075  3.938931  4.226232  4.921175    10  a 
+```
+]
+
+]
+
+---
+
+### Drug sales dataset 
+
+.panelset[
+
+.panel[.panel-name[dataset]
+
+```r
+head(drug_sales)
+```
+```
+# A tibble: 6 × 36
+  HOSPCODE   BRAND_EN   ORDERDATE_ym DSM_TERRITORY_CODE month_day Day_1 Day_2 Day_3 Day_4 Day_5 Day_6 Day_7 Day_8 Day_9 Day_10 Day_11 Day_12
+&lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;                  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 ""         xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+2 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+3 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+4 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+5 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+6 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+# ℹ 19 more variables: Day_13 &lt;dbl&gt;, Day_14 &lt;dbl&gt;, Day_15 &lt;dbl&gt;, Day_16 &lt;dbl&gt;, Day_17 &lt;dbl&gt;, Day_18 &lt;dbl&gt;, Day_19 &lt;dbl&gt;, Day_20 &lt;dbl&gt;,
+#   Day_21 &lt;dbl&gt;, Day_22 &lt;dbl&gt;, Day_23 &lt;dbl&gt;, Day_24 &lt;dbl&gt;, Day_25 &lt;dbl&gt;, Day_26 &lt;dbl&gt;, Day_27 &lt;dbl&gt;, Day_28 &lt;dbl&gt;, Day_29 &lt;dbl&gt;,
+#   Day_30 &lt;dbl&gt;, Day_31 &lt;dbl&gt;
+```
+]
+
+.panel[.panel-name[dplyr]
+
+```r
+system.time({
+  drug_sales %&gt;%
+    left_join(drug_sales1 %&gt;%select(ORDERDATE_ym,DSM_TERRITORY_CODE,HOSPCODE,paste0("last_day_", 16:1)),
+              by = c("HOSPCODE", "ORDERDATE_ym","DSM_TERRITORY_CODE","BRAND_EN","month_day"), multiple = "all") %&gt;%
+    select(HOSPCODE,ORDERDATE_ym,DSM_TERRITORY_CODE,
+           paste0("Day_", 1:16),paste0("last_day_", 1:16)) %&gt;%
+    mutate_at(c(paste0("Day_",1:16)), ~ if_else(is.na(.), 0, .))  %&gt;%
+    mutate_at(c(paste0("last_day_",1:16)), ~ if_else(is.na(.), 0, .))%&gt;%
+    mutate(
+      sum_10day_before=Day_1+Day_2+Day_3+Day_4+Day_5+Day_6+Day_7+Day_8+Day_9+Day_10,
+      sum_10day_last=last_day_1+last_day_2+last_day_3+last_day_4+last_day_5+last_day_6+last_day_7+last_day_8+last_day_9+last_day_10
+    )
+})
+```
+```
+   user  system elapsed
+674.151   0.956 673.282
+```
+]
+
+.panel[.panel-name[dtplyr]
+
+```r
+system.time({
+  lazy_dt(drug_sales) %&gt;%
+    left_join(drug_sales1 %&gt;%select(ORDERDATE_ym,DSM_TERRITORY_CODE,HOSPCODE,paste0("last_day_", 16:1)),
+              by = c("HOSPCODE", "ORDERDATE_ym","DSM_TERRITORY_CODE","BRAND_EN","month_day"), multiple = "all") %&gt;%
+    select(HOSPCODE,ORDERDATE_ym,DSM_TERRITORY_CODE,
+           paste0("Day_", 1:16),paste0("last_day_", 1:16)) %&gt;%
+    mutate_at(c(paste0("Day_",1:16)), ~ if_else(is.na(.), 0, .))  %&gt;%
+    mutate_at(c(paste0("last_day_",1:16)), ~ if_else(is.na(.), 0, .))%&gt;%
+    mutate(
+      sum_10day_before=Day_1+Day_2+Day_3+Day_4+Day_5+Day_6+Day_7+Day_8+Day_9+Day_10,
+      sum_10day_last=last_day_1+last_day_2+last_day_3+last_day_4+last_day_5+last_day_6+last_day_7+last_day_8+last_day_9+last_day_10
+    ) %&gt;% 
+    collect()
+})
+```
+```
+   user  system elapsed 
+ 12.169   3.027  13.714 
+```
+]
+
+
+]
+
+---
+### symphony database
+
+.panelset[
+.panel[.panel-name[redshift database]
+
+```r
+library(DBI)
+conn &lt;- DBI::dbConnect(odbc::odbc(), Driver="redshift", Server = "xxx", Port = "xxx", Database = "beigenexxx", UID = "xxx", WD = "xxx")
+dx &lt;- tbl(conn, in_schema("beigenexxx_xxx","dx"))
+dx %&gt;% count()
+```
+
+```
+# Source:   lazy query [?? x 1]
+# Database: Redshift
+#   8.0.2[xxx.redshift.amazonaws.com/beigenexxx]
+           n
+     &lt;int64&gt;
+1 4644781332
+```
+]
+.panel[.panel-name[dbplyr]
+
+```r
+library(dbplyr)
+dx %&gt;% 
+  filter(grepl("C83\\.1",diagnosis_code) &amp; service_date&gt;=as.Date("2019-01-01")) %&gt;% 
+  distinct(patient_id,service_date) %&gt;% 
+  group_by(patient_id) %&gt;% 
+  mutate(index_date=min(service_date),
+         count=sum(ifelse(service_date-index_date &lt;=180,1,0))) %&gt;% 
+  ungroup() %&gt;% 
+  filter(count&gt;=2) %&gt;% 
+  distinct(patient_id,index_date) %&gt;% 
+  count() 
+```
+
+```
+# Source:   lazy query [?? x 1]
+# Database: Redshift
+#   8.0.2[xxx.redshift.amazonaws.com/beigenexxx]
+        n
+  &lt;int64&gt;
+1   23657
+```
+]
+
+]
+
 ---
 ## Conclusion
 
@@ -795,6 +1237,9 @@ To be continued...
 class: center, middle
 
 # Thank You
+
+Kaiping Yang  
+email: kaiping.yang@beigene.com
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
