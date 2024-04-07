@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Applying R to Big Data Processing</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Kaiping Yang" />
+    <script src="Applying-R-to-Big-Data-Processing_files/header-attrs/header-attrs.js"></script>
+    <link href="Applying-R-to-Big-Data-Processing_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="Applying-R-to-Big-Data-Processing_files/tile-view/tile-view.js"></script>
+    <script src="Applying-R-to-Big-Data-Processing_files/clipboard/clipboard.min.js"></script>
+    <link href="Applying-R-to-Big-Data-Processing_files/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="Applying-R-to-Big-Data-Processing_files/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="Applying-R-to-Big-Data-Processing_files/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="Applying-R-to-Big-Data-Processing_files/fabric/fabric.min.js"></script>
+    <link href="Applying-R-to-Big-Data-Processing_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="Applying-R-to-Big-Data-Processing_files/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#E68080"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="Applying-R-to-Big-Data-Processing_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="Applying-R-to-Big-Data-Processing_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="Applying-R-to-Big-Data-Processing_files/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Applying R to Big Data Processing
+]
+.subtitle[
+## Dtplyr as an Example
+]
+.author[
+### Kaiping Yang
+]
+.institute[
+### BeiGene
+]
+
+---
+
+
+
+
+
+
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+&lt;style type="text/css"&gt;
+.remark-code {
+  max-height: 500px;
+}
+&lt;/style&gt;
+
+## Background
+
+#### Pharmaceutical Research
+##### Clinical Trial Data Analysis
+- During the development of new drugs, clinical trials generate a large amount of data on drug safety, efficacy, and dose-response relationships.
+- Big data analytics enables researchers to identify drug effects more quickly and accurately, and to assess risks and benefits.  
+
+##### Genomics and Bioinformatics
+- As the cost of genome sequencing decreases, vast amounts of genomic data are used to understand disease mechanisms, discover new targets, and develop personalized medicines.  
+- Big data analysis techniques can process these complex data, accelerating the development of precision medicine.
+
+##### Drug Repurposing
+- Analyzing data from existing drugs can reveal new uses for old drugs, significantly reducing the cost and time of drug development.  
+
+---
+
+## Background
+
+#### Real-World Studies
+##### Drug Effectiveness and Safety Assessment
+- Evaluating the real-world effectiveness and safety of drugs using observational studies and patient-reported outcomes.
+
+##### Medical Decision Support
+- Providing healthcare professionals with data-driven insights to support clinical decision-making.
+
+##### Personalized Medicine and Precision Treatment
+- Utilizing real-world data to tailor treatments to individual patients, improving outcomes and minimizing adverse effects.
+
+---
+### dplyr api flowchart
+
+
+
+&lt;center&gt;&lt;img src="files/dplyr api flowchart.png" height="500px" /&gt;&lt;/center&gt;
+---
+
+### dtplyr api
+
+.panelset[
+
+.panel[.panel-name[dtplyr]
+
+```r
+library(data.table)
+library(dtplyr)
+iris_lazy_dt &lt;- lazy_dt(iris)
+results_lazy_dt &lt;- iris_lazy_dt %&gt;% 
+  filter(Sepal.Length &gt; 5.0) %&gt;%
+  select(Species, Sepal.Length)
+results_lazy_dt
+```
+
+```
+## Source: local data table [118 x 2]
+## Call:   `_DT1`[Sepal.Length &gt; 5, .(Species, Sepal.Length)]
+## 
+##   Species Sepal.Length
+##   &lt;fct&gt;          &lt;dbl&gt;
+## 1 setosa           5.1
+## 2 setosa           5.4
+## 3 setosa           5.4
+## 4 setosa           5.8
+## 5 setosa           5.7
+## 6 setosa           5.4
+## # ℹ 112 more rows
+## 
+## # Use as.data.table()/as.data.frame()/as_tibble() to access results
+```
+]
+
+.panel[.panel-name[show_query]
+
+```r
+class(results_lazy_dt)
+```
+
+```
+## [1] "dtplyr_step_subset" "dtplyr_step"
+```
+
+```r
+results_lazy_dt %&gt;% show_query()
+```
+
+```
+## `_DT1`[Sepal.Length &gt; 5, .(Species, Sepal.Length)]
+```
+]
+
+.panel[.panel-name[collect]
+
+```r
+results &lt;- results_lazy_dt %&gt;% collect()
+results
+```
+
+```
+## # A tibble: 118 × 2
+##    Species Sepal.Length
+##    &lt;fct&gt;          &lt;dbl&gt;
+##  1 setosa           5.1
+##  2 setosa           5.4
+##  3 setosa           5.4
+##  4 setosa           5.8
+##  5 setosa           5.7
+##  6 setosa           5.4
+##  7 setosa           5.1
+##  8 setosa           5.7
+##  9 setosa           5.1
+## 10 setosa           5.4
+## # ℹ 108 more rows
+```
+]
+
+]
+
+---
+
+### dbplyr api
+
+.panelset[
+
+.panel[.panel-name[dbplyr]
+
+```r
+library(dbplyr)
+con &lt;- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+copy_to(con, iris, temporary = FALSE, name = "iris_table")
+results_db &lt;- con %&gt;% tbl("iris_table") %&gt;% 
+  filter(Sepal.Length &gt; 5.0) %&gt;%
+  select(Species, Sepal.Length)
+results_db
+```
+
+```
+## # Source:   SQL [?? x 2]
+## # Database: sqlite 3.41.2 [:memory:]
+##    Species Sepal.Length
+##    &lt;chr&gt;          &lt;dbl&gt;
+##  1 setosa           5.1
+##  2 setosa           5.4
+##  3 setosa           5.4
+##  4 setosa           5.8
+##  5 setosa           5.7
+##  6 setosa           5.4
+##  7 setosa           5.1
+##  8 setosa           5.7
+##  9 setosa           5.1
+## 10 setosa           5.4
+## # ℹ more rows
+```
+]
+
+.panel[.panel-name[show_query]
+
+```r
+class(results_db)
+```
+
+```
+## [1] "tbl_SQLiteConnection" "tbl_dbi"              "tbl_sql"             
+## [4] "tbl_lazy"             "tbl"
+```
+
+```r
+results_db %&gt;% show_query()
+```
+
+```
+## &lt;SQL&gt;
+## SELECT `Species`, `Sepal.Length`
+## FROM `iris_table`
+## WHERE (`Sepal.Length` &gt; 5.0)
+```
+]
+
+.panel[.panel-name[collect]
+
+```r
+results &lt;- results_db %&gt;% collect()
+results
+```
+
+```
+## # A tibble: 118 × 2
+##    Species Sepal.Length
+##    &lt;chr&gt;          &lt;dbl&gt;
+##  1 setosa           5.1
+##  2 setosa           5.4
+##  3 setosa           5.4
+##  4 setosa           5.8
+##  5 setosa           5.7
+##  6 setosa           5.4
+##  7 setosa           5.1
+##  8 setosa           5.7
+##  9 setosa           5.1
+## 10 setosa           5.4
+## # ℹ 108 more rows
+```
+
+```r
+DBI::dbDisconnect(con)
+```
+]
+
+]
+
+---
+
+### sparklyr api
+
+.panelset[
+
+.panel[.panel-name[sparklyr]
+
+```r
+library(sparklyr)
+# spark_install()
+sc &lt;- spark_connect(master = "local")
+iris_spark &lt;- copy_to(sc, iris, "iris_spark", overwrite = TRUE)
+results_spark &lt;- iris_spark %&gt;%
+  select(Species, Sepal_Length) %&gt;%
+  filter(Sepal_Length &gt; 5.0)
+results_spark
+```
+```
+# Source: spark&lt;?&gt; [?? x 2]
+   Species Sepal_Length
+   &lt;chr&gt;          &lt;dbl&gt;
+ 1 setosa           5.1
+ 2 setosa           5.4
+ 3 setosa           5.4
+ 4 setosa           5.8
+ 5 setosa           5.7
+ 6 setosa           5.4
+ 7 setosa           5.1
+ 8 setosa           5.7
+ 9 setosa           5.1
+10 setosa           5.4
+# ℹ more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+]
+
+.panel[.panel-name[show_query]
+
+```r
+class(results_spark)
+results_spark %&gt;% show_query()
+```
+```
+[1] "tbl_spark" "tbl_sql"   "tbl_lazy"  "tbl"
+
+&lt;SQL&gt;
+SELECT `Species`, `Sepal_Length`
+FROM `iris_spark`
+WHERE (`Sepal_Length` &gt; 5.0)
+```
+]
+
+.panel[.panel-name[collect]
+
+```r
+results &lt;- results_spark %&gt;% collect()
+results
+spark_disconnect(sc)
+```
+```
+# A tibble: 118 × 2
+   Species Sepal_Length
+   &lt;chr&gt;          &lt;dbl&gt;
+ 1 setosa           5.1
+ 2 setosa           5.4
+ 3 setosa           5.4
+ 4 setosa           5.8
+ 5 setosa           5.7
+ 6 setosa           5.4
+ 7 setosa           5.1
+ 8 setosa           5.7
+ 9 setosa           5.1
+10 setosa           5.4
+# ℹ 108 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+]
+
+]
+
+---
+
+### arrow api
+
+.panelset[
+
+.panel[.panel-name[arrow]
+
+```r
+library(arrow)
+iris_arrow &lt;- iris %&gt;% to_duckdb() %&gt;% to_arrow()
+results_arrow &lt;- iris_arrow %&gt;% 
+  filter(Sepal.Length &gt; 5.0) %&gt;%
+  select(Species, Sepal.Length)
+results_arrow
+```
+```
+RecordBatchReader (query)
+Species: string
+Sepal.Length: double
+
+* Filter: (Sepal.Length &gt; 5)
+See $.data for the source Arrow object
+```
+]
+
+.panel[.panel-name[show_query]
+
+```r
+class(results_arrow)
+# [1] "arrow_dplyr_query"
+results_arrow %&gt;% show_query()
+# ExecPlan with 4 nodes:
+# 3:SinkNode{}
+#   2:ProjectNode{projection=[Species, Sepal.Length]}
+#     1:FilterNode{filter=(Sepal.Length &gt; 5)}
+#       0:SourceNode{}
+```
+]
+
+.panel[.panel-name[collect]
+
+```r
+results &lt;- results_arrow %&gt;% collect()
+results
+```
+```
+# A tibble: 118 × 2
+   Species Sepal.Length
+   &lt;chr&gt;          &lt;dbl&gt;
+ 1 setosa           5.1
+ 2 setosa           5.4
+ 3 setosa           5.4
+ 4 setosa           5.8
+ 5 setosa           5.7
+ 6 setosa           5.4
+ 7 setosa           5.1
+ 8 setosa           5.7
+ 9 setosa           5.1
+10 setosa           5.4
+# ℹ 108 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+]
+
+]
+
+---
+
+## Background
+
+- **Pharmaceutical Industry Data**: Clinical trials, genomes, drug reactions, etc.
+- **R's Role**: Versatile data science tool with rich data manipulation capabilities.
+- **data.table**: High-performance package for large-scale data operations.
+- **dplyr**: Concise syntax for data manipulation with verb functions.
+- **dtplyr**: Combines the best of both worlds for efficient data processing.
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```r
+library(dtplyr)
+library(data.table)
+library(dplyr)
+library(tidyverse)
+library(microbenchmark)
+library(knitr)
+```
+]
+
+]
+
+---
+
+## Introduction of data.table
+
+### Why `data.table`?
+
+* concise syntax: fast to type, fast to read
+* fast speed
+* memory efficient
+* careful API lifecycle management
+* community
+* feature rich
+
+---
+
+### Features
+
+* fast and friendly delimited **file reader**: **[`?fread`](https://rdatatable.gitlab.io/data.table/reference/fread.html)**, see also [convenience features for _small_ data](https://github.com/Rdatatable/data.table/wiki/Convenience-features-of-fread)
+* fast and feature rich delimited **file writer**: **[`?fwrite`](https://rdatatable.gitlab.io/data.table/reference/fwrite.html)**
+* low-level **parallelism**: many common operations are internally parallelized to use multiple CPU threads
+* fast and scalable aggregations; e.g. 100GB in RAM (see [benchmarks](https://duckdblabs.github.io/db-benchmark/) on up to **two billion rows**)
+* fast and feature rich joins: **ordered joins** (e.g. rolling forwards, backwards, nearest and limited staleness), **[overlapping range joins](https://github.com/Rdatatable/data.table/wiki/talks/EARL2014_OverlapRangeJoin_Arun.pdf)** (similar to `IRanges::findOverlaps`), **[non-equi joins](https://github.com/Rdatatable/data.table/wiki/talks/ArunSrinivasanUseR2016.pdf)** (i.e. joins using operators `&gt;, &gt;=, &lt;, &lt;=`), **aggregate on join** (`by=.EACHI`), **update on join**
+* fast add/update/delete columns **by reference** by group using no copies at all
+* fast and feature rich **reshaping** data: **[`?dcast`](https://rdatatable.gitlab.io/data.table/reference/dcast.data.table.html)** (_pivot/wider/spread_) and **[`?melt`](https://rdatatable.gitlab.io/data.table/reference/melt.data.table.html)** (_unpivot/longer/gather_)
+* **any R function from any R package** can be used in queries not just the subset of functions made available by a database backend, also columns of type `list` are supported
+* has **[no dependencies](https://en.wikipedia.org/wiki/Dependency_hell)** at all other than base R itself, for simpler production/maintenance
+* the R dependency is **as old as possible for as long as possible**, dated April 2014, and we continuously test against that version; e.g. v1.11.0 released on 5 May 2018 bumped the dependency up from 5 year old R 3.0.0 to 4 year old R 3.1.0
+
+---
+
+### data.table syntax
+
+
+
+```r
+library(data.table)
+DT = as.data.table(iris)
+# FROM[WHERE, SELECT, GROUP BY]
+# DT  [i,     j,      by]
+
+DT[Petal.Width &gt; 1.0, mean(Petal.Length), by = Species]
+#      Species       V1
+#1: versicolor 4.362791
+#2:  virginica 5.552000
+```
+&lt;center&gt;&lt;img src="files/data table syntax.png" height="300px" /&gt;&lt;/center&gt;
+---
+
+### Function reference
+* **between() `%between%` inrange() `%inrange%`**: Convenience functions for range subsets.
+* **fcoalesce()**: Coalescing missing values
+* **duplicated(&lt;data.table&gt;) unique(&lt;data.table&gt;) anyDuplicated(&lt;data.table&gt;) uniqueN()**: Determine Duplicate Rows
+* **fcase()**:fast case when 
+* **fifelse()**: Fast if-else
+* **fsort()**: Fast parallel sort
+* **first() last()**: First/last item of an object
+* **like() `%like%` `%ilike%` `%flike%` `%plike%`**: Convenience function for calling grep.
+* **na.omit(&lt;data.table&gt;)**: Remove rows with missing values on columns specified
+* **nafill() setnafill()**: Fill missing values
+* **`%notin%`**: Convenience operator for checking if an example is not in a set of elements
+* **fintersect() fsetdiff() funion() fsetequal()**: Set operations for data tables
+* **shift()**: Fast lead/lag for vectors and lists
+
+---
+
+### any R function from any R package
+
+.panelset[
+
+.panel[.panel-name[simulated data]
+
+```r
+set.seed(123)  
+x = rnorm(200)
+df &lt;- data.table(  
+  group = rep(c("A", "B"), each = 100),  
+  x = rnorm(200),  
+  y = rnorm(200) + 0.5 * x + rnorm(200, sd = 0.2)
+)
+```
+```
+      group          x            y
+     &lt;char&gt;      &lt;num&gt;        &lt;num&gt;
+  1:      A  2.1988103 -0.138991390
+  2:      A  1.3124130 -1.289209562
+  3:      A -0.2651451  0.137939824
+  4:      A  0.5431941 -0.296800882
+  5:      A -0.4143399  0.893416905
+ ---                               
+196:      B  1.5039006  0.006455795
+197:      B -0.7741449  0.250878838
+198:      B  0.8457315 -2.656341062
+199:      B -1.2606829  0.921820920
+200:      B -0.3545424  1.396673491
+```
+]
+
+.panel[.panel-name[r base]
+
+```r
+groups &lt;- split(df, df$group)
+lapply(groups, function(groups) coef(lm(y ~ x, data = groups))["x"])
+```
+```
+$A
+          x 
+-0.08606835 
+
+$B
+          x 
+-0.02820232 
+```
+]
+
+.panel[.panel-name[in data.table]
+
+```r
+df[ , coef(lm(y ~ x))['x'], by = group]
+```
+```
+    group          V1
+   &lt;char&gt;       &lt;num&gt;
+1:      A -0.08606835
+2:      B -0.02820232
+```
+]
+
+]
+---
+
+## import data
+
+.panelset[
+
+.panel[.panel-name[adlb]
+
+```r
+set.seed(123)
+nrows = 1e7
+# nrows = 1e2
+ADLB &lt;- tibble(
+  STUDYID = rep("StudyXYZ", nrows),
+  USUBJID = paste("SUBJ", sprintf("%08d", 1:nrows), sep = ""),
+  SAFFL = sample(c("Y", "N"), size = nrows, replace = TRUE, prob = c(0.8, 0.2)),
+  EFFFL = sample(c("Y", "N"), size = nrows, replace = TRUE, prob = c(0.7, 0.3)),
+  COHORT = sample(c("A", "B", "C"), size = nrows, replace = TRUE),
+  TRT01A = sample(c("DrugX", "DrugY", "Placebo"), size = nrows, replace = TRUE),
+  PARAMCD = sample(c("ALT", "AST", "BILI", "ALP", "GGT", "LDH"), nrows, replace = TRUE),
+  AVAL = round(runif(nrows, min = 5, max = 250), digits = 1),
+  AVISIT = sample(c("Baseline", "Week 1", "Week 4", "Week 8", "Week 12"), nrows, replace = TRUE),
+  AVISITN = as.numeric(factor(AVISIT, levels = c("Baseline", "Week 1", "Week 4", "Week 8", "Week 12"))),
+  ABLFL = sample(c("Y", "N"), nrows, replace = TRUE, prob = c(0.1, 0.9))
+)
+
+head(ADLB)
+# write_csv(ADLB,"data/ADLB.csv")
+```
+
+]
+
+.panel[.panel-name[tibble]
+
+```r
+ADLB &lt;- vroom::vroom("data/ADLB.csv")
+head(ADLB)
+```
+```
+# A tibble: 6 × 11
+  STUDYID  USUBJID      SAFFL EFFFL COHORT TRT01A  PARAMCD  AVAL AVISIT   AVISITN ABLFL
+  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;
+1 StudyXYZ SUBJ00000001 Y     Y     B      DrugY   BILI    180.  Week 8         4 N    
+2 StudyXYZ SUBJ00000002 Y     Y     C      DrugX   ALT     144.  Week 1         2 N    
+3 StudyXYZ SUBJ00000003 Y     Y     A      DrugX   GGT     108   Week 4         3 N    
+4 StudyXYZ SUBJ00000004 N     Y     C      Placebo LDH      41.2 Week 8         4 N    
+5 StudyXYZ SUBJ00000005 N     Y     A      DrugX   LDH      36.7 Week 8         4 N    
+6 StudyXYZ SUBJ00000006 Y     Y     C      Placebo LDH     123.  Baseline       1 N 
+```
+]
+
+.panel[.panel-name[data.table]
+
+```r
+ADLB_dt &lt;- as.data.table(ADLB)
+head(ADLB_dt)
+```
+```
+    STUDYID      USUBJID SAFFL EFFFL COHORT  TRT01A PARAMCD  AVAL   AVISIT AVISITN ABLFL
+1: StudyXYZ SUBJ00000001     Y     Y      B   DrugY    BILI 180.4   Week 8       4     N
+2: StudyXYZ SUBJ00000002     Y     Y      C   DrugX     ALT 143.7   Week 1       2     N
+3: StudyXYZ SUBJ00000003     Y     Y      A   DrugX     GGT 108.0   Week 4       3     N
+4: StudyXYZ SUBJ00000004     N     Y      C Placebo     LDH  41.2   Week 8       4     N
+5: StudyXYZ SUBJ00000005     N     Y      A   DrugX     LDH  36.7   Week 8       4     N
+6: StudyXYZ SUBJ00000006     Y     Y      C Placebo     LDH 123.2 Baseline       1     N
+```
+]
+
+.panel[.panel-name[lazy_dt]
+
+```r
+ADLB_lazy_dt &lt;- lazy_dt(ADLB)
+ADLB_lazy_dt
+```
+```
+Source: local data table [10,000,000 x 11]
+Call:   `_DT1`
+
+  STUDYID  USUBJID      SAFFL EFFFL COHORT TRT01A  PARAMCD  AVAL AVISIT   AVISITN ABLFL
+  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;
+1 StudyXYZ SUBJ00000001 Y     Y     B      DrugY   BILI    180.  Week 8         4 N    
+2 StudyXYZ SUBJ00000002 Y     Y     C      DrugX   ALT     144.  Week 1         2 N    
+3 StudyXYZ SUBJ00000003 Y     Y     A      DrugX   GGT     108   Week 4         3 N    
+4 StudyXYZ SUBJ00000004 N     Y     C      Placebo LDH      41.2 Week 8         4 N    
+5 StudyXYZ SUBJ00000005 N     Y     A      DrugX   LDH      36.7 Week 8         4 N    
+6 StudyXYZ SUBJ00000006 Y     Y     C      Placebo LDH     123.  Baseline       1 N    
+# ℹ 9,999,994 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+# Use as.data.table()/as.data.frame()/as_tibble() to access results
+```
+]
+
+]
+---
+
+## Purpose
+
+- **Introduction**: Use of dtplyr for big data processing in the pharmaceutical industry.
+- **Examples**: Data reading, cleaning, processing, and analysis with dtplyr.
+- **Comparison**: Performance and ease of use versus other R packages.
+- **Pros &amp; Cons**: Advantages, disadvantages, and application scenarios of dtplyr.
+
+&lt;center&gt;&lt;img src="files/dtplyr_bridging_the_big_data_gap.jpg" height="350px" /&gt;&lt;/center&gt;
+
+---
+
+## Methods
+
+- **Data Size**: Millions of rows.
+- **R Version**: 4.1.2
+- **Packages**: dtplyr, data.table, dplyr, tidyverse, microbenchmark, etc.
+- **dtplyr Usage**: Lazy_dt() for conversion, dplyr verbs for operations, and conversion back to data frames or tibbles.
+- **Performance**: microbenchmark() for timing comparisons and autoplot() for visualization.
+
+---
+
+### Performance Comparison
+- fast function of data.table
+
+.panelset[
+
+.panel[.panel-name[fsort]
+
+```r
+x = runif(1e6)
+system.time(ans1 &lt;- sort(x, method="quick"))
+#&gt;    user  system elapsed 
+#&gt;   0.109   0.003   0.113 
+system.time(ans2 &lt;- fsort(x))
+#&gt;    user  system elapsed 
+#&gt;   0.027   0.002   0.028 
+identical(ans1, ans2)
+#&gt; [1] TRUE
+```
+]
+
+.panel[.panel-name[fifelse]
+
+```r
+microbenchmark(
+  ifelse = ifelse(x &gt; 0.5, 1, 0),
+  if_else = if_else(x &gt; 0.5, 1, 0),
+  fifelse = fifelse(x &gt; 0.5, 1, 0),
+  times = 10
+)
+```
+```
+Unit: milliseconds
+    expr       min        lq      mean    median        uq       max neval
+  ifelse 23.448985 23.635879 23.732932 23.739346 23.860450 23.930417    10
+ if_else 33.108476 33.186554 33.429599 33.471577 33.643490 33.780251    10
+ fifelse  4.579173  4.620743  4.720137  4.675604  4.724404  5.215244    10
+```
+]
+
+.panel[.panel-name[fcase]
+
+```r
+microbenchmark(
+  case_when = case_when(
+    x &lt; 0.5 ~ 0,
+    x &gt;= 0.5 ~ 1
+  ),
+  fcase = fcase(
+    x &lt; 0.5, 0,
+    x &gt;= 0.5, 1
+  ),
+  times = 10
+)
+```
+```
+Unit: milliseconds
+      expr      min       lq     mean   median       uq      max neval
+ case_when 39.61633 39.81768 40.12419 39.93951 40.30975 41.18214    10
+     fcase 13.68499 13.89618 14.20279 13.98189 14.21023 15.90134    10
+```
+]
+
+]
+
+---
+
+### Performance Comparison
+- Reading large files with `fread()`.
+
+.panelset[
+
+.panel[.panel-name[R code]
+
+```r
+microbenchmark(
+  read.csv = read.csv("data/ADLB.csv"),
+  read_csv = readr::read_csv("data/ADLB.csv"),
+  vroom = vroom::vroom("data/ADLB.csv"),
+  fread = fread("data/ADLB.csv"),
+  times = 1
+)
+
+# Unit: milliseconds
+#      expr        min         lq       mean     median         uq        max neval
+#  read.csv 24714.3880 24714.3880 24714.3880 24714.3880 24714.3880 24714.3880     1
+#  read_csv 13850.4502 13850.4502 13850.4502 13850.4502 13850.4502 13850.4502     1
+#     vroom   693.9692   693.9692   693.9692   693.9692   693.9692   693.9692     1
+#     fread  2410.7339  2410.7339  2410.7339  2410.7339  2410.7339  2410.7339     1
+```
+]
+
+]
+
+---
+
+### Performance Comparison
+- Data cleaning with `filter()`, `mutate()`.
+
+.panelset[
+
+.panel[.panel-name[filter()]
+
+```r
+microbenchmark(
+  dplyr = ADLB %&gt;% filter(SAFFL == "Y"),
+  data.table = ADLB_dt[SAFFL == "Y"],
+  dtplyr = lazy_dt(ADLB) %&gt;% filter(SAFFL == "Y") %&gt;% collect(),
+  dtplyr_lazy_dt = ADLB_lazy_dt %&gt;% filter(SAFFL == "Y") %&gt;% collect(),
+  dtplyr_step = ADLB_lazy_dt %&gt;% filter(SAFFL == "Y"),
+  times = 10
+)
+```
+
+```
+# Unit: microseconds
+#            expr        min         lq         mean      median          uq         max neval
+#           dplyr 647833.231 726671.896  912982.2005  765481.822  776278.598 2195434.633    10
+#      data.table 548526.187 556034.098  741727.8233  716915.549  906294.220 1026066.912    10
+#          dtplyr 797393.558 905034.695 1277613.8551 1162588.351 1289447.394 2617747.699    10
+#  dtplyr_lazy_dt 451409.459 461740.580  726950.0772  849271.776  905560.158  957123.854    10
+#     dtplyr_step    383.841    387.971     625.2246     670.492     743.212     863.952    10
+```
+]
+
+.panel[.panel-name[mutate()]
+
+```r
+ADLB_dt_copy &lt;- copy(ADLB_dt)
+microbenchmark(
+  dplyr = ADLB %&gt;% mutate(SUBJID = paste(STUDYID, USUBJID )),
+  data.table = ADLB_dt_copy[, `:=`(SUBJID =paste(STUDYID, USUBJID ))],
+  dtplyr = lazy_dt(ADLB) %&gt;% mutate(SUBJID =paste(STUDYID, USUBJID )) %&gt;% collect(),
+  dtplyr_lazy_dt = ADLB_lazy_dt %&gt;% mutate(SUBJID = paste(STUDYID, USUBJID )) %&gt;% collect(),
+  times = 10
+)
+
+# Unit: seconds
+#            expr      min       lq     mean   median       uq      max neval
+#           dplyr 3.155472 3.170916 3.237791 3.199588 3.204866 3.694258    10
+#      data.table 1.573593 1.581879 1.585378 1.585486 1.589344 1.595787    10
+#          dtplyr 1.929725 2.108639 2.453532 2.198572 2.902294 3.111678    10
+#  dtplyr_lazy_dt 1.869382 1.877024 2.016532 1.897585 1.932124 2.574179    10
+```
+]
+
+]
+
+---
+
+### Performance Comparison
+&lt;!-- Database-like ops benchmark --&gt;
+- Data processing with `group_by()`, `left_join()`.
+
+.panelset[
+
+.panel[.panel-name[groupby]
+&lt;center&gt;&lt;img src="files/groupby_benchmark.png" height="350px" /&gt;&lt;/center&gt;
+]
+
+.panel[.panel-name[join]
+&lt;center&gt;&lt;img src="files/join_benchmark.png" height="350px" /&gt;&lt;/center&gt;
+]
+
+
+]
+
+---
+
+### Performance Comparison
+
+- Data processing
+
+.panelset[
+
+.panel[.panel-name[dplyr]
+
+```r
+dplyr_process &lt;- function(ADLB){
+  ADLB %&gt;%
+    filter(SAFFL == "Y") %&gt;%
+    arrange(TRT01A,PARAMCD,AVAL) %&gt;% 
+    group_by(TRT01A,PARAMCD) %&gt;%
+    mutate(SUBJID = paste(STUDYID, USUBJID)) %&gt;% 
+    summarise(a = mean(AVAL))
+}
+```
+]
+
+.panel[.panel-name[data.table]
+
+```r
+dt_process &lt;- function(ADLB_dt){
+  ADLB_dt[SAFFL == "Y"][order(TRT01A, PARAMCD, AVAL)][, `:=`(SUBJID = paste(STUDYID, 
+    USUBJID)), by = .(TRT01A, PARAMCD)][, .(a = mean(AVAL)), 
+    keyby = .(TRT01A, PARAMCD)]
+}
+```
+]
+
+.panel[.panel-name[dtplyr]
+
+```r
+dtplyr_process &lt;- function(ADLB){
+  lazy_dt(ADLB_dt) %&gt;%
+    filter(SAFFL == "Y") %&gt;%
+    arrange(TRT01A,PARAMCD,AVAL) %&gt;% 
+    group_by(TRT01A,PARAMCD) %&gt;%
+    mutate(SUBJID = paste(STUDYID, USUBJID)) %&gt;% 
+    summarise(a = mean(AVAL)) %&gt;% 
+    collect()
+}
+```
+]
+
+.panel[.panel-name[dtplyr_lazy_dt]
+
+```r
+dtplyr_lazy_dt_process &lt;- function(ADLB_lazy_dt){
+  ADLB_lazy_dt %&gt;%
+    filter(SAFFL == "Y") %&gt;%
+    arrange(TRT01A,PARAMCD,AVAL,AVAL) %&gt;% 
+    group_by(TRT01A,PARAMCD) %&gt;%
+    mutate(SUBJID = paste(STUDYID, USUBJID)) %&gt;% 
+    summarise(a = mean(AVAL)) %&gt;% 
+    collect()
+}
+```
+]
+
+.panel[.panel-name[microbenchmark]
+
+```r
+ADLB &lt;- ADLB[1:10000,]
+ADLB_dt &lt;- as.data.table(ADLB)
+ADLB_lazy_dt &lt;- lazy_dt(ADLB)
+microbenchmark(
+  dplyr = dplyr_process(ADLB),
+  data.table = dt_process(ADLB_dt),
+  dtplyr = dtplyr_process(ADLB),
+  dtplyr_lazy_dt = dtplyr_lazy_dt_process(ADLB_lazy_dt),
+  times = 1
+)
+
+# Unit: milliseconds
+#            expr       min        lq      mean    median        uq      max neval
+#           dplyr 47.190455 48.033038 48.235663 48.394003 48.495019 48.91615    10
+#      data.table  6.061097  6.157647  6.477774  6.494478  6.763869  6.90094    10
+#          dtplyr 12.714876 12.807087 13.017500 13.047317 13.111517 13.35109    10
+#  dtplyr_lazy_dt 11.814074 11.913484 12.080253 12.015099 12.306755 12.40006    10
+```
+]
+
+
+]
+
+---
+
+## Results
+
+- **Tasks with dtplyr**:
+  - Reading large files with `fread()`.
+  - Data cleaning with `filter()`, `mutate()`, `recode()`, and `na.omit()`.
+  - Data processing with `group_by()`, `summarise()`, `arrange()`, and `left_join()`.
+  - Data analysis with `count()`, `top_n()`, and `ggplot()` for visualization.
+- **Performance Comparison**:
+  - dtplyr is generally faster than dplyr.
+  - data.table outperforms in grouping and joining operations.
+- **Pros &amp; Cons of dtplyr**:
+  - A compromise between dplyr and data.table.
+  - High performance with ease of use.
+  - Limitations include limited dplyr function support, no in-place updates, and no distributed computing.
+
+---
+
+## Case Study
+
+### Biomarker anaysis: Post-hoc anaysis dataset
+- The dataset has 1.24 million rows and 31 columns
+- The dataset included the results of standard post hoc analyses of different biomarkers
+
+
+### Real world research: Drug sales dataset 
+- The dataset has 4.21 million rows and 36 columns
+- The dataset records the sales information of each drug every day.
+### Real world research: symphony database
+- The dataset has 4.64 billion rows
+- The dataset contains 10 years of data on Medicare claims diagnoses in the United States
+---
+
+### Post-hoc anaysis dataset 
+
+.panelset[
+
+.panel[.panel-name[dataset]
+
+```r
+head(result_data_raw)
+```
+```
+# A tibble: 6 × 22
+  Type  BMK_N…¹ Endpo…² Model Effect Descr…³ TRT   BMK      Pval    EST    LWR    UPR FREQN
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1 BMUT… ALL     DCR     ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+2 BMUT… ALL     OBJR    ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+3 BMUT… ALL     OS      ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+4 BMUT… ALL     PFS     ""    Treat… T/C @ … T/C   All       xxx    xxx    xxx    xxx  xxx
+5 BMUT… BMUT_A… DCR     "Pre… Predi… (T/C @… T/C   L1/L0     xxx    xxx    xxx    xxx  xxx 
+6 BMUT… BMUT_A… DCR     "Pre… Progn… L1/L0 … C     L1/L0     xxx    xxx    xxx    xxx  xxx
+# … with 9 more variables: FREQN1 &lt;chr&gt;, FREQN2 &lt;chr&gt;, KMMEDI &lt;chr&gt;, KMMEDI1 &lt;chr&gt;,
+#   KMMEDI2 &lt;chr&gt;, LRT_PVAL &lt;dbl&gt;, RESRATE &lt;chr&gt;, RESRATE1 &lt;chr&gt;, RESRATE2 &lt;chr&gt;, and
+#   abbreviated variable names ¹​BMK_Name, ²​Endpoint, ³​Description
+# ℹ Use `colnames()` to see all variable names
+```
+]
+
+.panel[.panel-name[dplyr]
+
+```r
+get_bmk_rank &lt;- function(result_data_raw){
+  Cutoffs &lt;- result_data_raw %&gt;% distinct(Type,BMK_Name) %&gt;% 
+    mutate(Cutoff=str_extract(BMK_Name,"__\\w+?$") %&gt;% str_remove('^__') %&gt;% coalesce('Default')) 
+  Effects &lt;- result_data_raw %&gt;% distinct(Model,Effect) %&gt;% 
+    mutate(Effect1 = ifelse(Model == 'Predictive' &amp; Effect=='Prognostic', "Prognostic ", Effect)) 
+  BMK_Names &lt;- result_data_raw %&gt;% distinct(Type,BMK_Name,Effect) %&gt;% 
+    filter(Effect == "Prog + Pred" | (Type != "" &amp; BMK_Name == "ALL")) %&gt;% distinct(paste(Type,BMK_Name)) %&gt;% pull()
+  result_data_raw %&gt;%
+    filter(paste(Type,BMK_Name) %in% BMK_Names) %&gt;% 
+    arrange(Type) %&gt;% 
+    mutate(
+      Pval = round(Pval, 4),LRT_PVAL = round(LRT_PVAL, 4),
+      Estimate = glue("{v}({l}, {u})",v = sprintf("%.2f", EST),l = sprintf("%.2f", LWR), u = sprintf("%.2f", UPR))
+    ) %&gt;%
+    left_join(Cutoffs,by=c("Type","BMK_Name")) %&gt;% left_join(Effects,by=c("Model","Effect")) %&gt;% 
+    select(-Effect) %&gt;%
+    mutate(Type = str_to_upper(Type),
+           BMK_Name = ifelse(BMK_Name == "ALL",paste(str_to_upper(Type),"ALL",sep = "__"),BMK_Name)) %&gt;% 
+    rename(Biomarker = BMK_Name, Effect = Effect1, P_value = Pval
+    )
+}
+```
+]
+
+.panel[.panel-name[dtplyr]
+
+```r
+get_bmk_rank_dt &lt;- function(result_data_raw){
+  result_data_raw_lazy_dt &lt;- lazy_dt(result_data_raw)
+  Cutoffs &lt;- result_data_raw_lazy_dt %&gt;% distinct(Type,BMK_Name) %&gt;% 
+    mutate(Cutoff=str_extract(BMK_Name,"__\\w+?$") %&gt;% str_remove('^__') %&gt;% coalesce('Default')) 
+  Effects &lt;- result_data_raw_lazy_dt %&gt;% distinct(Model,Effect) %&gt;% 
+    mutate(Effect1 = ifelse(Model == 'Predictive' &amp; Effect=='Prognostic', "Prognostic ", Effect)) 
+  BMK_Names &lt;- result_data_raw_lazy_dt %&gt;% distinct(Type,BMK_Name,Effect) %&gt;% 
+    filter(Effect == "Prog + Pred" | (Type != "" &amp; BMK_Name == "ALL")) %&gt;% distinct(paste(Type,BMK_Name)) %&gt;% pull()
+  result_data_raw_lazy_dt %&gt;%
+    filter(paste(Type,BMK_Name) %in% BMK_Names) %&gt;% 
+    arrange(Type) %&gt;% 
+    mutate(
+      Pval = round(Pval, 4),LRT_PVAL = round(LRT_PVAL, 4),
+      Estimate = glue("{v}({l}, {u})",v = sprintf("%.2f", EST),l = sprintf("%.2f", LWR), u = sprintf("%.2f", UPR))
+    ) %&gt;%
+    left_join(Cutoffs,by=c("Type","BMK_Name")) %&gt;% left_join(Effects,by=c("Model","Effect")) %&gt;% 
+    select(-Effect) %&gt;%
+    mutate(Type = str_to_upper(Type),
+           BMK_Name = ifelse(BMK_Name == "ALL",paste(str_to_upper(Type),"ALL",sep = "__"),BMK_Name)) %&gt;% 
+    rename(Biomarker = BMK_Name, Effect = Effect1, P_value = Pval
+    ) %&gt;% as_tibble()
+}
+```
+]
+
+.panel[.panel-name[microbenchmark]
+
+```r
+microbenchmark::microbenchmark(
+  get_bmk_rank(result_data_raw),
+  get_bmk_rank_dt(result_data_raw),
+  times = 10
+)
+# Unit: seconds
+#             expr       min        lq      mean    median        uq       max neval cld
+#     get_bmk_rank 10.678574 11.063172 11.326080 11.279834 11.717900 11.816315    10   b
+#  get_bmk_rank_dt  2.902138  3.398134  3.830075  3.938931  4.226232  4.921175    10  a 
+```
+]
+
+]
+
+---
+
+### Drug sales dataset 
+
+.panelset[
+
+.panel[.panel-name[dataset]
+
+```r
+head(drug_sales)
+```
+```
+# A tibble: 6 × 36
+  HOSPCODE   BRAND_EN   ORDERDATE_ym DSM_TERRITORY_CODE month_day Day_1 Day_2 Day_3 Day_4 Day_5 Day_6 Day_7 Day_8 Day_9 Day_10 Day_11 Day_12
+&lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;                  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 ""         xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+2 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+3 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+4 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+5 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+6 "xxxxxxxx" xxxxxxxxxx 2022-01-01   ""                        31    NA    NA    NA    NA    NA    NA    NA    NA    NA     NA     NA     NA
+# ℹ 19 more variables: Day_13 &lt;dbl&gt;, Day_14 &lt;dbl&gt;, Day_15 &lt;dbl&gt;, Day_16 &lt;dbl&gt;, Day_17 &lt;dbl&gt;, Day_18 &lt;dbl&gt;, Day_19 &lt;dbl&gt;, Day_20 &lt;dbl&gt;,
+#   Day_21 &lt;dbl&gt;, Day_22 &lt;dbl&gt;, Day_23 &lt;dbl&gt;, Day_24 &lt;dbl&gt;, Day_25 &lt;dbl&gt;, Day_26 &lt;dbl&gt;, Day_27 &lt;dbl&gt;, Day_28 &lt;dbl&gt;, Day_29 &lt;dbl&gt;,
+#   Day_30 &lt;dbl&gt;, Day_31 &lt;dbl&gt;
+```
+]
+
+.panel[.panel-name[dplyr]
+
+```r
+system.time({
+  drug_sales %&gt;%
+    left_join(drug_sales1 %&gt;%select(ORDERDATE_ym,DSM_TERRITORY_CODE,HOSPCODE,paste0("last_day_", 16:1)),
+              by = c("HOSPCODE", "ORDERDATE_ym","DSM_TERRITORY_CODE","BRAND_EN","month_day"), multiple = "all") %&gt;%
+    select(HOSPCODE,ORDERDATE_ym,DSM_TERRITORY_CODE,
+           paste0("Day_", 1:16),paste0("last_day_", 1:16)) %&gt;%
+    mutate_at(c(paste0("Day_",1:16)), ~ if_else(is.na(.), 0, .))  %&gt;%
+    mutate_at(c(paste0("last_day_",1:16)), ~ if_else(is.na(.), 0, .))%&gt;%
+    mutate(
+      sum_10day_before=Day_1+Day_2+Day_3+Day_4+Day_5+Day_6+Day_7+Day_8+Day_9+Day_10,
+      sum_10day_last=last_day_1+last_day_2+last_day_3+last_day_4+last_day_5+last_day_6+last_day_7+last_day_8+last_day_9+last_day_10
+    )
+})
+```
+```
+   user  system elapsed
+674.151   0.956 673.282
+```
+]
+
+.panel[.panel-name[dtplyr]
+
+```r
+system.time({
+  lazy_dt(drug_sales) %&gt;%
+    left_join(drug_sales1 %&gt;%select(ORDERDATE_ym,DSM_TERRITORY_CODE,HOSPCODE,paste0("last_day_", 16:1)),
+              by = c("HOSPCODE", "ORDERDATE_ym","DSM_TERRITORY_CODE","BRAND_EN","month_day"), multiple = "all") %&gt;%
+    select(HOSPCODE,ORDERDATE_ym,DSM_TERRITORY_CODE,
+           paste0("Day_", 1:16),paste0("last_day_", 1:16)) %&gt;%
+    mutate_at(c(paste0("Day_",1:16)), ~ if_else(is.na(.), 0, .))  %&gt;%
+    mutate_at(c(paste0("last_day_",1:16)), ~ if_else(is.na(.), 0, .))%&gt;%
+    mutate(
+      sum_10day_before=Day_1+Day_2+Day_3+Day_4+Day_5+Day_6+Day_7+Day_8+Day_9+Day_10,
+      sum_10day_last=last_day_1+last_day_2+last_day_3+last_day_4+last_day_5+last_day_6+last_day_7+last_day_8+last_day_9+last_day_10
+    ) %&gt;% 
+    collect()
+})
+```
+```
+   user  system elapsed 
+ 12.169   3.027  13.714 
+```
+]
+
+
+]
+
+---
+### symphony database
+
+.panelset[
+.panel[.panel-name[redshift database]
+
+```r
+library(DBI)
+conn &lt;- DBI::dbConnect(odbc::odbc(), Driver="redshift", Server = "xxx", Port = "xxx", Database = "beigenexxx", UID = "xxx", WD = "xxx")
+dx &lt;- tbl(conn, in_schema("beigenexxx_xxx","dx"))
+dx %&gt;% count()
+```
+
+```
+# Source:   lazy query [?? x 1]
+# Database: Redshift
+#   8.0.2[xxx.redshift.amazonaws.com/beigenexxx]
+           n
+     &lt;int64&gt;
+1 4644781332
+```
+]
+.panel[.panel-name[dbplyr]
+
+```r
+library(dbplyr)
+dx %&gt;% 
+  filter(grepl("C83\\.1",diagnosis_code) &amp; service_date&gt;=as.Date("2019-01-01")) %&gt;% 
+  distinct(patient_id,service_date) %&gt;% 
+  group_by(patient_id) %&gt;% 
+  mutate(index_date=min(service_date),
+         count=sum(ifelse(service_date-index_date &lt;=180,1,0))) %&gt;% 
+  ungroup() %&gt;% 
+  filter(count&gt;=2) %&gt;% 
+  distinct(patient_id,index_date) %&gt;% 
+  count() 
+```
+
+```
+# Source:   lazy query [?? x 1]
+# Database: Redshift
+#   8.0.2[xxx.redshift.amazonaws.com/beigenexxx]
+        n
+  &lt;int64&gt;
+1   23657
+```
+]
+
+]
+
+---
+## Conclusion
+
+- **dtplyr for Big Data in Pharmaceuticals**:
+  - Improves data analysis efficiency and readability.
+- **Usefulness of dtplyr**:
+  - Aids analysts in processing big data without compromising on syntax simplicity or performance speed.
+- **Recommendation**:
+  - Analysts should choose R packages based on data size and analysis needs.
+  - Flexibly use dtplyr, data.table, dplyr, and other tools for optimal results.
+
+---
+## Reference
+
+- [big-data-dtplyr](https://www.business-science.io/code-tools/2019/08/15/big-data-dtplyr.html)  
+- [https://dtplyr.tidyverse.org/index.html](https://dtplyr.tidyverse.org/index.html)  
+- [https://rdatatable.gitlab.io/data.table/](https://rdatatable.gitlab.io/data.table/)  
+- [https://r4ds.hadley.nz/](https://r4ds.hadley.nz/)  
+- [https://spark.posit.co/](https://spark.posit.co/)
+
+---
+
+class: center, middle
+
+# Thank You
+
+Kaiping Yang  
+email: kaiping.yang@beigene.com
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
