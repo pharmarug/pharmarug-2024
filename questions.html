@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title> - China Pharma R user group meeting 2024</title>
+<title> - Follow-up Q &amp; A</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> <i class="bi bi-house-fill" role="img">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-house-fill" role="img">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Program</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./questions.html"> <i class="bi bi-question-mark" role="img">
+    <a class="nav-link active" href="./questions.html" aria-current="page"> <i class="bi bi-question-mark" role="img">
 </i> 
 <span class="menu-text">Q &amp; A</span></a>
   </li>  
@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">China Pharma R user group meeting 2024</h1>
+<h1 class="title">Follow-up Q &amp; A</h1>
 </div>
 
 
@@ -137,48 +137,54 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>2nd China Pharmaceutical Industry R User Group Meeting will be held on March 29, 2024, both on-site and online. On-site meeting locations: Shanghai (Novartis campus), Beijing (MSD campus).</p>
-<p>第二届中国医药行业R用户大会将于2024年3月29日召开。线上线下同步进行。线下会议地点：上海（诺华园区），北京（默沙东园区）。</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Key dates</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>13-Oct-2023</td>
-<td>Call for Papers Opens</td>
-</tr>
-<tr class="even">
-<td>31-Jan-2024</td>
-<td>Call for Papers Closes</td>
-</tr>
-<tr class="odd">
-<td>1-Feb-2024 to&nbsp; 7-Feb-2024</td>
-<td>Acceptance Notices Sent to Authors</td>
-</tr>
-<tr class="even">
-<td>5-Feb-2024</td>
-<td>Conference Registration Opens</td>
-</tr>
-<tr class="odd">
-<td>8-Mar-2024</td>
-<td>Conference Registration Closes</td>
-</tr>
-<tr class="even">
-<td>22-Mar-2024</td>
-<td>Final Papers/Slides Due</td>
-</tr>
-<tr class="odd">
-<td>29-Mar-2024</td>
-<td>China Pharma R User Group meeting</td>
-</tr>
-</tbody>
-</table>
+<section id="leveraging-r-for-real-time-data-analysis-and-reporting-in-the-aihi-paradigm" class="level2">
+<h2 class="anchored" data-anchor-id="leveraging-r-for-real-time-data-analysis-and-reporting-in-the-aihi-paradigm">Leveraging R for Real-Time Data Analysis and Reporting in the AI+HI Paradigm</h2>
+<section id="kai-gu-请问下这个tool的适用人群包括哪些部门" class="level3">
+<h3 class="anchored" data-anchor-id="kai-gu-请问下这个tool的适用人群包括哪些部门">Kai Gu: 请问下这个tool的适用人群包括哪些部门</h3>
+<p>Hao:适用人群比较广泛，有数据分析，做table，画图等需求的部门都可以，如DM 用来做data query， Programming和Stat用来计算和画图</p>
+</section>
+<section id="longfei-正如hao所说-我们这一行是很严格的-这个case-准确率如何" class="level3">
+<h3 class="anchored" data-anchor-id="longfei-正如hao所说-我们这一行是很严格的-这个case-准确率如何">Longfei: 正如Hao所说 我们这一行是很严格的 这个case 准确率如何？</h3>
+<p>Hao:当前主要是copilot，人机结合，人工验证。 主要用GPT3.5，简单到中等任务可以，复杂的需要人在draft的code上做进一步修改。GPT4 准确率会更高，但是太慢不能real-time，人机结合体验不好，同时token cost也比较高。随着LLM不断推陈出新，可以期待越来越多的任务会变得容易</p>
+</section>
+<section id="zou-ivan-请问以上结果都是在模型中基于prompt-input做出来的吗-是否有用到其他rag或者fine-tuned" class="level3">
+<h3 class="anchored" data-anchor-id="zou-ivan-请问以上结果都是在模型中基于prompt-input做出来的吗-是否有用到其他rag或者fine-tuned">Zou, Ivan: 请问以上结果都是在模型中基于prompt input做出来的吗? 是否有用到其他RAG或者fine-tuned?</h3>
+<p>Hao:现在是基于直接prompt和RAG辅助。之前有用到复杂的COT和GPT4去处理复杂的问题，但是处理时间太长。为了real-time达到copilot的效果，主要是用GPT3.5； 未来会考虑fine-tune，效率可以进一步提高</p>
+</section>
+</section>
+<section id="davinci-journey-in-the-early-phase-oncology-study" class="level2">
+<h2 class="anchored" data-anchor-id="davinci-journey-in-the-early-phase-oncology-study">DaVinci Journey in the Early Phase Oncology Study</h2>
+<section id="请问和teal的融合时需要把data都按照teal做预处理吗teal_data" class="level3">
+<h3 class="anchored" data-anchor-id="请问和teal的融合时需要把data都按照teal做预处理吗teal_data">请问和teal的融合时，需要把data都按照teal做预处理吗？（teal_data？）</h3>
+<p>是的，需要的。Teal是基于ADaM，遵守Roche内部的ADS 标准。当我们的ADaM和Roche ADaM 有出入的时候，会有报错。</p>
+<p>有时候提示信息也不会很明显，这样导致了的很多时间都花在了debug改数据上。</p>
+</section>
+</section>
+<section id="optimize-decision-making-efficiency-and-speed-by-performing-exploratory-analysis-through-the-meddrah-platform" class="level2">
+<h2 class="anchored" data-anchor-id="optimize-decision-making-efficiency-and-speed-by-performing-exploratory-analysis-through-the-meddrah-platform">Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform</h2>
+<section id="qike-请问这个网站是开放还是仅供内部使用的" class="level3">
+<h3 class="anchored" data-anchor-id="qike-请问这个网站是开放还是仅供内部使用的">Qike: 请问这个网站是开放还是仅供内部使用的？</h3>
+<p>ZY: 目前仅仅是内部使用</p>
+</section>
+<section id="wenlu-请问ongoing-的数据如果遇到data-issue是否会影响展示的数据" class="level3">
+<h3 class="anchored" data-anchor-id="wenlu-请问ongoing-的数据如果遇到data-issue是否会影响展示的数据">wenlu: 请问ongoing 的数据如果遇到data issue，是否会影响展示的数据。</h3>
+<p>ZY: 要看是什么样的data issue，是否影响了后端的计算。如果程序做了error处理，也会报出来一些错误。通过错误看是改程序还是改数据。对于不影响展示的数据，比如outlier之类的，这个工具也可以用来发现data issue</p>
+</section>
+<section id="wenlu-请问开发这个交互平台用了多长的时间和投入了多少resource" class="level3">
+<h3 class="anchored" data-anchor-id="wenlu-请问开发这个交互平台用了多长的时间和投入了多少resource">wenlu: 请问开发这个交互平台用了多长的时间和投入了多少resource</h3>
+<p>不算前期调研，MDR 板块用了大概半年时间。我做了大部分的后端和前端，一名IT同事做了一部分前端，两个本组的同事帮忙做了两个后端API 的函数。</p>
+</section>
+<section id="keyu-chen-请问这个平台的web应用是支持多线程的吗会存在高并发的问题吗" class="level3">
+<h3 class="anchored" data-anchor-id="keyu-chen-请问这个平台的web应用是支持多线程的吗会存在高并发的问题吗">Keyu Chen: 请问这个平台的Web应用是支持多线程的吗？会存在高并发的问题吗</h3>
+<p>ZY: 支持多线程， 高并发还要后面去解决。现在只是先把功能做好，能用起来。</p>
+</section>
+<section id="zou-ivan-请问在build前端界面时由于后端是使用的r和python那么前端不直接用python-flask或者r-shiny构建的理由-同样对于table和plot的display有考虑直接使用python或者r中的库去实现相同效果吗" class="level3">
+<h3 class="anchored" data-anchor-id="zou-ivan-请问在build前端界面时由于后端是使用的r和python那么前端不直接用python-flask或者r-shiny构建的理由-同样对于table和plot的display有考虑直接使用python或者r中的库去实现相同效果吗">Zou, Ivan: 请问在build前端界面时，由于后端是使用的R和python，那么前端不直接用Python Flask或者R shiny构建的理由? 同样对于table和plot的display，有考虑直接使用Python或者R中的库去实现相同效果吗?</h3>
+<p>ZY: Javascript 做前端会更灵活和方便。互动性也会更好。Plotly 也有Python 版本吧。R 产生的图不支持互动。</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

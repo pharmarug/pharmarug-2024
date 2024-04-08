@@ -7,6 +7,34 @@
     "text": "Please follow the following Link.\n[IMPORTANT] Please scan the QR code for payment, and note that\n\nattending in person 150 RMB (lunch included).\nattending online 80 RMB.\nNote PharmaR + Name (注明PharmaR +名字).\nScreen save the image, and upload via the registration link.\nFill out Fapiao information at the end."
   },
   {
+    "objectID": "questions.html",
+    "href": "questions.html",
+    "title": "Follow-up Q & A",
+    "section": "",
+    "text": "Hao:适用人群比较广泛，有数据分析，做table，画图等需求的部门都可以，如DM 用来做data query， Programming和Stat用来计算和画图\n\n\n\nHao:当前主要是copilot，人机结合，人工验证。 主要用GPT3.5，简单到中等任务可以，复杂的需要人在draft的code上做进一步修改。GPT4 准确率会更高，但是太慢不能real-time，人机结合体验不好，同时token cost也比较高。随着LLM不断推陈出新，可以期待越来越多的任务会变得容易\n\n\n\nHao:现在是基于直接prompt和RAG辅助。之前有用到复杂的COT和GPT4去处理复杂的问题，但是处理时间太长。为了real-time达到copilot的效果，主要是用GPT3.5； 未来会考虑fine-tune，效率可以进一步提高"
+  },
+  {
+    "objectID": "questions.html#leveraging-r-for-real-time-data-analysis-and-reporting-in-the-aihi-paradigm",
+    "href": "questions.html#leveraging-r-for-real-time-data-analysis-and-reporting-in-the-aihi-paradigm",
+    "title": "Follow-up Q & A",
+    "section": "",
+    "text": "Hao:适用人群比较广泛，有数据分析，做table，画图等需求的部门都可以，如DM 用来做data query， Programming和Stat用来计算和画图\n\n\n\nHao:当前主要是copilot，人机结合，人工验证。 主要用GPT3.5，简单到中等任务可以，复杂的需要人在draft的code上做进一步修改。GPT4 准确率会更高，但是太慢不能real-time，人机结合体验不好，同时token cost也比较高。随着LLM不断推陈出新，可以期待越来越多的任务会变得容易\n\n\n\nHao:现在是基于直接prompt和RAG辅助。之前有用到复杂的COT和GPT4去处理复杂的问题，但是处理时间太长。为了real-time达到copilot的效果，主要是用GPT3.5； 未来会考虑fine-tune，效率可以进一步提高"
+  },
+  {
+    "objectID": "questions.html#davinci-journey-in-the-early-phase-oncology-study",
+    "href": "questions.html#davinci-journey-in-the-early-phase-oncology-study",
+    "title": "Follow-up Q & A",
+    "section": "DaVinci Journey in the Early Phase Oncology Study",
+    "text": "DaVinci Journey in the Early Phase Oncology Study\n\n请问和teal的融合时，需要把data都按照teal做预处理吗？（teal_data？）\n是的，需要的。Teal是基于ADaM，遵守Roche内部的ADS 标准。当我们的ADaM和Roche ADaM 有出入的时候，会有报错。\n有时候提示信息也不会很明显，这样导致了的很多时间都花在了debug改数据上。"
+  },
+  {
+    "objectID": "questions.html#optimize-decision-making-efficiency-and-speed-by-performing-exploratory-analysis-through-the-meddrah-platform",
+    "href": "questions.html#optimize-decision-making-efficiency-and-speed-by-performing-exploratory-analysis-through-the-meddrah-platform",
+    "title": "Follow-up Q & A",
+    "section": "Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform",
+    "text": "Optimize decision-making efficiency and speed by performing exploratory analysis through the MedDRAH platform\n\nQike: 请问这个网站是开放还是仅供内部使用的？\nZY: 目前仅仅是内部使用\n\n\nwenlu: 请问ongoing 的数据如果遇到data issue，是否会影响展示的数据。\nZY: 要看是什么样的data issue，是否影响了后端的计算。如果程序做了error处理，也会报出来一些错误。通过错误看是改程序还是改数据。对于不影响展示的数据，比如outlier之类的，这个工具也可以用来发现data issue\n\n\nwenlu: 请问开发这个交互平台用了多长的时间和投入了多少resource\n不算前期调研，MDR 板块用了大概半年时间。我做了大部分的后端和前端，一名IT同事做了一部分前端，两个本组的同事帮忙做了两个后端API 的函数。\n\n\nKeyu Chen: 请问这个平台的Web应用是支持多线程的吗？会存在高并发的问题吗\nZY: 支持多线程， 高并发还要后面去解决。现在只是先把功能做好，能用起来。\n\n\nZou, Ivan: 请问在build前端界面时，由于后端是使用的R和python，那么前端不直接用Python Flask或者R shiny构建的理由? 同样对于table和plot的display，有考虑直接使用Python或者R中的库去实现相同效果吗?\nZY: Javascript 做前端会更灵活和方便。互动性也会更好。Plotly 也有Python 版本吧。R 产生的图不支持互动。"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "China Pharma R user group meeting 2024",
