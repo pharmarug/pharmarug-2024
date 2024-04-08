@@ -18,7 +18,7 @@ website:
         icon: "folder"
       - href: questions.qmd
         text: Q & A
-        icon: "question-mark"
+        icon: "question-circle"
   page-footer:
     left: |
       Supported by
