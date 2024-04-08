@@ -13,12 +13,12 @@ website:
       - href: index.qmd
         text: Home
         icon: "house-fill"
-      - href: reg.qmd
-        text: Registration
-        icon: "calendar"
       - href: program.qmd
         text: Program
         icon: "folder"
+      - href: questions.qmd
+        text: Q & A
+        icon: "question-mark"
   page-footer:
     left: |
       Supported by
