@@ -18,7 +18,10 @@ website:
         icon: "folder"
       - href: questions.qmd
         text: Q & A
-        icon: "question-circle"
+        icon: "question-circleg"
+      - href: highlights.qmd
+        text: Event highlights
+        icon: "camera"
   page-footer:
     left: |
       Supported by
